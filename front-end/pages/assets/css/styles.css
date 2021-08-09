@@ -1,0 +1,9 @@
+a {
+  color: var(--bs-success);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #39b72e;
+}
+
