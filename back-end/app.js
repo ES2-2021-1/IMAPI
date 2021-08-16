@@ -1,5 +1,5 @@
-import express from 'express';
-import dotenv from 'dotenv';
+express = require('express');
+dotenv = require('dotenv');
 
 const app = express();
 
@@ -9,4 +9,4 @@ app.get('/', function(req, res){
     res.send('Bye world!');
 });
 
-export default app;
+module.exports = app;
