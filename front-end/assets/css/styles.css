@@ -1,0 +1,82 @@
+a {
+  color: var(--bs-success);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #39b72e;
+}
+
+.btn-check:active + .btn-primary:focus, .btn-check:checked + .btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 .25rem rgba(20,255,0,0.5);
+}
+
+.btn-check:active + .btn-primary, .btn-check:checked + .btn-primary, .btn-primary.active, .btn-primary:active, .show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: var(--bs-green);
+  border-color: var(--bs-green);
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: var(--bs-green);
+  border-color: var(--bs-green);
+}
+
+.btn-check:focus + .btn-primary, .btn-primary:focus {
+  color: #fff;
+  background-color: #39b72e;
+  border-color: #39b72e;
+  box-shadow: 0 0 0 .25rem rgb(57,183,46);
+}
+
+.card {
+  border: 0px;
+}
+
+.btn-primary {
+  border: 0px;
+}
+
+.row {
+  margin-top: 10%;
+}
+
+@media (max-width: 570px) {
+  .row {
+    margin-top: 20%;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  /*border-radius: 10px;*/
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #39b72e;
+}
+
+::-webkit-scrollbar-track {
+  background: #9BE268;
+  border-radius: 0px;
+  box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+}
+
+.dropdown {
+  margin: 20% 0 0 5%;
+  width: min(25%, 200px);
+}
+
+@media (min-width: 600px) {
+  .dropdown {
+    margin: 10% 0 0 5%;
+    /*width: 150px;*/
+  }
+}
+
