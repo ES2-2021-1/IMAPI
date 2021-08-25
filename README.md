@@ -1,6 +1,6 @@
 # IMAPI
 ## Descrição
-IMAPI é um acrônimo para Instrumento de Monitoramento e Avaliação de Projetos Incubados. Esta ferramenta nasceu como uma oportunidade de aprendizado para os estudantes da disciplina de Engenharia de Software 2 do segundo período de 2021 pela UFFS. Os principais problemas indentificados pela equipe original e aos quais esta plataforma se presta a solucionar foram os de organização e centralização dos processos relacionados ao incubamento de empresas pela INNE que a empresa sofria à época.
+IMAPI é um acrônimo para Instrumento de Monitoramento e Avaliação de Projetos Incubados. Esta ferramenta nasceu como uma oportunidade de aprendizado para os estudantes da disciplina de Engenharia de Software 2 do segundo período de 2021 pela UFFS. Os principais problemas indentificados pela equipe original e aos quais esta plataforma visa solucionar, foram: organização e centralização dos processos relacionados as startups que serão incubadas pela incubadora de negócios INNE.
 ## Começando
 ### Dependências
 Ferramentas necessárias para executar a solução:
@@ -30,3 +30,8 @@ Algumas ferramentas utilizadas internamente para facilitar o desenvolvimento do 
 - [Vue Devtools](https://github.com/vuejs/devtools#vue-devtools) (v3.0): para facilitar a inspeção de elementos HTML no navegador.
 ### Documentação das rotas
 -- em construção --
+### Contato
+Alguns desenvolvedores que disponibilizaram seus contatos em caso de dúvidas no futuro:
+- Dra. Graziela Tonin (professora): gttonin@gmail.com
+- Alisson Peloso (dev): alisson.luan2000@gmail.com
+- Rafael Fernandes (dev): rflgf0@gmail.com
