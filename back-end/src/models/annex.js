@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         as: 'submission',
         foreignKey: 'submissionId'
       });
-      Annex.belongsTo(models.Submission, {
+      Annex.belongsTo(models.Assignment, {
         as: 'assignment',
         foreignKey: 'assignmentId'
       });
-      Annex.belongsTo(models.Submission, {
+      Annex.belongsTo(models.Step, {
         as: 'step',
         foreignKey: 'stepId'
       });
