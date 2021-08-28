@@ -12,12 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasOne(models.Startup, {
         as: 'myStartup',
-        foreignKey: 'owner'
+        foreignKey: 'ownerId'
       })
 
       User.hasOne(models.Startup, {
         as: 'startup',
-        foreignKey: 'resMentor'
+        foreignKey: 'mentorId'
       })
 
       User.hasOne(models.Collaborator, {
