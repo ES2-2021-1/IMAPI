@@ -11,16 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Startup.belongsTo(models.User, {
-        as: 'resMentor',
-        foreignKey: 'resMentor'
+        as: 'mentor',
+        foreignKey: 'mentorId'
       });
       Startup.belongsTo(models.User, {
         as: 'owner',
-        foreignKey: 'owner'
+        foreignKey: 'ownerId'
       });
       Startup.hasOne(models.Step, {
         as: 'currentStep',
-        foreignKey: 'currentStep'
+        foreignKey: 'currentStepId'
       });
     }
   };
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     state: DataTypes.BOOLEAN,
     pitchLink: DataTypes.STRING,
     ownerId: DataTypes.INTEGER,
-    resMentorId: DataTypes.INTEGER,
+    mentorId: DataTypes.INTEGER,
     currentStepId: DataTypes.INTEGER,
   }, {
     sequelize,
