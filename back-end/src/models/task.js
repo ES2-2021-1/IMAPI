@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   Task.init({
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
+    stepId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Task',
