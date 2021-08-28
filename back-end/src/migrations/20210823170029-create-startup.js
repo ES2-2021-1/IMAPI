@@ -10,18 +10,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: false
       },
       state: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        allowNull: false
       },
       pitchLink: {
         type: Sequelize.STRING
       },
-      resMentor: {
+      mentorId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
@@ -30,7 +33,7 @@ module.exports = {
           key: 'id'
         }
       },
-      owner: {
+      ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -40,7 +43,7 @@ module.exports = {
           key: 'id'
         }
       },
-      currentStep: {
+      currentStepId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
