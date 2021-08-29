@@ -25,11 +25,11 @@ module.exports = {
           key: 'id'
         }
       },
-      assignmentId: {
+      taskId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: 'Assignments'
+            tableName: 'Tasks'
           },
           key: 'id'
         }

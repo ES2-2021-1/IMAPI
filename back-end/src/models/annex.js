@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         as: 'submission',
         foreignKey: 'submissionId'
       });
-      Annex.belongsTo(models.Assignment, {
-        as: 'assignment',
-        foreignKey: 'assignmentId'
+      Annex.belongsTo(models.Task, {
+        as: 'task',
+        foreignKey: 'taskId'
       });
       Annex.belongsTo(models.Step, {
         as: 'step',
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     path: DataTypes.STRING,
     type: DataTypes.INTEGER,
     submissionId: DataTypes.INTEGER,
-    assignmentId: DataTypes.INTEGER,
+    taskId: DataTypes.INTEGER,
     stepId: DataTypes.INTEGER,
   }, {
     sequelize,
