@@ -5,7 +5,7 @@ IMAPI é um acrônimo para Instrumento de Monitoramento e Avaliação de Projeto
 ### Dependências
 Ferramentas necessárias para executar a solução:
 - [npm](https://www.npmjs.com/)
-- [Node.js](https://nodejs.org/en/)
+- [Node.js](https://nodejs.org/en/) 
 - [Vue.js](https://vuejs.org/)
 ### Instalação
 Clone o repositório com o comando:
@@ -29,7 +29,7 @@ Algumas ferramentas utilizadas internamente para facilitar o desenvolvimento do 
 - [draw.io](https://app.diagrams.net/): diagramas UML. Os arquivos de edição .drawio se encontram em `Documentação`, em suas respectivas pastas.
 - [Vue Devtools](https://github.com/vuejs/devtools#vue-devtools) (v3.0): para facilitar a inspeção de elementos HTML no navegador.
 ### Documentação das rotas
--- em construção --
+--- em construção ---
 ### Contato
 Alguns desenvolvedores que disponibilizaram seus contatos em caso de dúvidas no futuro:
 - Dra. Graziela Tonin (professora): gttonin@gmail.com
