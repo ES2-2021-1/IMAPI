@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       submissionDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       },
       feedBack: {
         type: Sequelize.TEXT
