@@ -3,24 +3,32 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Etapa extends Model {
+  class Step extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Step.belongsTo(models.Module, {
+        as: 'module',
+        foreignKey: 'moduleId'
+      });
+      
+      Step.hasOne(models.Task, {
+        as: 'task',
+        foreignKey: 'stepId'
+      });
     }
   };
   Etapa.init({
-    module: DataTypes.INTEGER,
+    moduleId: DataTypes.INTEGER,
     title: DataTypes.STRING,
-    abstract: DataTypes.TEXT,
+    summary: DataTypes.TEXT,
     content: DataTypes.TEXT
   }, {
     sequelize,
-    modelName: 'Etapa',
+    modelName: 'Step',
   });
-  return Etapa;
+  return Step;
 };
