@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   };
-  Etapa.init({
+  Step.init({
     moduleId: DataTypes.INTEGER,
     title: DataTypes.STRING,
     summary: DataTypes.TEXT,
