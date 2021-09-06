@@ -11,21 +11,22 @@ class TaskController{
                 res.status(201);
                 res.json(response);
 
-            }, err => {
-
+            }).catch(err => {
+                
+                let ret = new Object();
+                if(err.errors){
+                    err.errors.forEach(error => {
+                        ret[error.path] = [error.message] 
+                    });
+                } else {
+                    ret[err.name] = [err.message]
+                }
                 res.status(400);
-
-                res.json({
+                res.json({errors : ret});
     
-                    error_message : err.message,
-                    error_name : err.name,
-                    error : err.erros   
-    
-                });
-
-            }
-
-          );
+                res.json(err)
+               
+         });;
         
     }
 
@@ -58,27 +59,22 @@ class TaskController{
             res.status(201);
             res.json({...response.dataValues});
 
-            }, err => {
-
-            //let ret = new Object();
-            /*
-            essa parte do codigo nao esta funcionando para a Task
-
-            err.errors.forEach(error => {
-                ret[error.path] = [error.message] 
-            });
-            */
-
-            res.status(400);
-
-            res.json({
-
-                error_message : err.message,
-                error_name : err.name,
-                error : err.erros   
-
-            });
-        });
+            }).catch(err => {
+                
+                let ret = new Object();
+                if(err.errors){
+                    err.errors.forEach(error => {
+                        ret[error.path] = [error.message] 
+                    });
+                } else {
+                    ret[err.name] = [err.message]
+                }
+                res.status(400);
+                res.json({errors : ret});
+    
+                res.json(err)
+               
+         });
     }
 
     show (req, res) {
@@ -88,28 +84,29 @@ class TaskController{
             where: {
               id: req.params.id
             }
-          }).then(
-
-            response => {
+          }).then(response => {
                 console.log(response)
                 res.status(201);
                 res.json({...response.dataValues});
 
-            }, err => {
-
-                res.status(400);
-
-                res.json({
-    
-                    error_message : err.message,
-                    error_name : err.name,
-                    error : err.erros   
-    
-                });
-
             }
 
-          );
+          ).catch(err => {
+                
+            let ret = new Object();
+            if(err.errors){
+                err.errors.forEach(error => {
+                    ret[error.path] = [error.message] 
+                });
+            } else {
+                ret[err.name] = [err.message]
+            }
+            res.status(400);
+            res.json({errors : ret});
+
+            res.json(err)
+           
+     });
 
         
     }
@@ -138,17 +135,21 @@ class TaskController{
              // MESMO SE NAO FOR ATUALIZADO NAO CAI NO ERRO, APENAS RETORNA 0, ENTÃO FIZ ISSO :)
              res.json({done: response[0] == 1 ? true : false });
  
-             }, err => {
- 
-             res.status(400);
- 
-             res.json({
- 
-                 error_message : err.message,
-                 error_name : err.name,
-                 error : err.erros   
- 
-             });
+             }).catch(err => {
+                
+                let ret = new Object();
+                if(err.errors){
+                    err.errors.forEach(error => {
+                        ret[error.path] = [error.message] 
+                    });
+                } else {
+                    ret[err.name] = [err.message]
+                }
+                res.status(400);
+                res.json({errors : ret});
+    
+                res.json(err)
+               
          });
 
     }
@@ -166,17 +167,21 @@ class TaskController{
              res.status(201);
              res.json({done: response == 1 ? true : false });
  
-             }, err => {
- 
-             res.status(400);
- 
-             res.json({
- 
-                 error_message : err.message,
-                 error_name : err.name,
-                 error : err.erros   
- 
-             });
+             }).catch(err => {
+                
+                let ret = new Object();
+                if(err.errors){
+                    err.errors.forEach(error => {
+                        ret[error.path] = [error.message] 
+                    });
+                } else {
+                    ret[err.name] = [err.message]
+                }
+                res.status(400);
+                res.json({errors : ret});
+    
+                res.json(err)
+               
          });
     }
 }
