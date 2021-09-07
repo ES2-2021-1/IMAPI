@@ -4,9 +4,10 @@ const bcrypt = require('bcrypt');
 
 class UserController{
     index (req, res) {
-        let users = User.findAll().then((response) => {
+        User.findAll().then((response) => {
             res.status(200);
-            res.json(response)
+            res.json(response);
+            return;
         }).catch((err) => {
             let ret = new Object();
             if(err.errors){
@@ -18,6 +19,7 @@ class UserController{
             }
             res.status(400);
             res.json({errors : ret});
+            return;
         })
     }
 
@@ -38,6 +40,7 @@ class UserController{
 
         if (validator.fails()){
             res.send(validator.errors);
+            return;
         }
 
         bcrypt.hash(req.body.password, salt, (err, encrypted) => {
@@ -46,6 +49,7 @@ class UserController{
             User.create(req.body).then((response) => {
                 res.status(201);
                 res.json({...response.dataValues, password: ""});
+                return;
             }).catch((err) => {
                 let ret = new Object();
                 if(err.errors){
@@ -57,12 +61,13 @@ class UserController{
                 }
                 res.status(400);
                 res.json({errors : ret});
+                return;
             });
         });
     }
 
     show (req, res) {
-        let users = User.findAll(
+        User.findAll(
             {
                 where: {
                     id : req.params.id
@@ -70,7 +75,8 @@ class UserController{
             }
         ).then((response) => {
             res.status(200);
-            res.json(response)
+            res.json(response);
+            return;
         }).catch((err) => {
             let ret = new Object();
             if(err.errors){
@@ -82,6 +88,7 @@ class UserController{
             }
             res.status(400);
             res.json({errors : ret});
+            return;
         })
     }
 
@@ -102,6 +109,7 @@ class UserController{
 
         if (validator.fails()){
             res.send(validator.errors);
+            return;
         }
 
         if(req.body['password']){
@@ -109,8 +117,14 @@ class UserController{
                 req.body.password = encrypted;
     
                 User.update(req.body, {where: { id: req.params.id }}).then((response) => {
-                    res.status(201);
-                    res.json("Deu certo");
+                    if(response){
+                        res.status(200);
+                        res.json("Update performed successfully");
+                        return;
+                    } 
+                    res.status(400);
+                    res.json("update not performed");
+                    return;
                 }).catch((err) => {
                     let ret = new Object();
                     if(err.errors){
@@ -122,19 +136,20 @@ class UserController{
                     }
                     res.status(400);
                     res.json({errors : ret});
+                    return;
                 });
             });
-            return;
         }
 
         User.update(req.body, {where: { id: req.params.id }}).then((response) => {
-            if(response == 1){
+            if(response){
                 res.status(200);
                 res.json("Update performed successfully");
-            } else {
-                res.status(400);
-                res.json("update not performed");
-            }
+                return;
+            } 
+            res.status(400);
+            res.json("update not performed");
+            return;
         }).catch((err) => {
             console.log(err);
             let ret = new Object();
@@ -147,6 +162,7 @@ class UserController{
             }
             res.status(400);
             res.json({errors : ret});
+            return;
         });        
     }
 
@@ -159,9 +175,11 @@ class UserController{
             if(response){
                 res.status(200);
                 res.json("Deleted successfully");
+                return;
             }
             res.status(200);
             res.json("Not deleted");
+            return;
             
         }).catch((err) => {
             console.log(err);
@@ -175,6 +193,7 @@ class UserController{
             }
             res.status(400);
             res.json({errors : ret});
+            return;
         })
     }
 }
