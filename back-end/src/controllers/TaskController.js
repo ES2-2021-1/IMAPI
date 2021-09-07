@@ -10,6 +10,7 @@ class TaskController{
                 console.log(response)
                 res.status(201);
                 res.json(response);
+                return;
 
             }).catch(err => {
                 
@@ -25,6 +26,7 @@ class TaskController{
                 res.json({errors : ret});
     
                 res.json(err)
+                return;
                
          });;
         
@@ -51,6 +53,7 @@ class TaskController{
 
         if (validator.fails()){
             res.send(validator.errors);
+            return;
         }
 
        Task.create(req.body).then(
@@ -58,6 +61,7 @@ class TaskController{
            
             res.status(201);
             res.json({...response.dataValues});
+            return;
 
             }).catch(err => {
                 
@@ -73,6 +77,7 @@ class TaskController{
                 res.json({errors : ret});
     
                 res.json(err)
+                return;
                
          });
     }
@@ -88,6 +93,7 @@ class TaskController{
                 console.log(response)
                 res.status(201);
                 res.json({...response.dataValues});
+                return;
 
             }
 
@@ -105,6 +111,7 @@ class TaskController{
             res.json({errors : ret});
 
             res.json(err)
+            return;
            
      });
 
@@ -125,15 +132,20 @@ class TaskController{
 
         if (validator.fails()){
             res.send(validator.errors);
+            return;
         }
 
         Task.update(req.body, { where: { id: req.params.id } }).then(
             response => {
             
-             res.status(201);
-
-             // MESMO SE NAO FOR ATUALIZADO NAO CAI NO ERRO, APENAS RETORNA 0, ENTÃO FIZ ISSO :)
-             res.json({done: response[0] == 1 ? true : false });
+            if(response[0]){
+                res.status(200);
+                res.json("Updated successfully");
+                return;
+            }
+            res.status(400);
+            res.json("Not updated");
+            return;
  
              }).catch(err => {
                 
@@ -149,6 +161,7 @@ class TaskController{
                 res.json({errors : ret});
     
                 res.json(err)
+                return;
                
          });
 
@@ -164,8 +177,14 @@ class TaskController{
 
             response => {
 
-             res.status(201);
-             res.json({done: response == 1 ? true : false });
+                if(response){
+                    res.status(200);
+                    res.json("Deleted successfully");
+                    return;
+                }
+                res.status(400);
+                res.json("Not deleted");
+                return;
  
              }).catch(err => {
                 
@@ -181,6 +200,7 @@ class TaskController{
                 res.json({errors : ret});
     
                 res.json(err)
+                return;
                
          });
     }
