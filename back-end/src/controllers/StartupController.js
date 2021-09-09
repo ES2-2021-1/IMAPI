@@ -36,6 +36,7 @@ class StartupController{
         let validator = new Validator(req.body, rules);
 
         if (validator.fails()){
+            res.status(400);
             res.send(validator.errors);
             return;
         }
@@ -99,6 +100,7 @@ class StartupController{
         let validator = new Validator(req.body, rules);
 
         if (validator.fails()){
+            res.status(400);
             res.send(validator.errors);
             return;
         }

@@ -76,6 +76,7 @@ class AnnexController{
         const validator = new Validator({ annexId }, rules);
 
         if (validator.fails()){
+            res.status(400);
             res.send(validator.errors);
             return;
         }
@@ -114,6 +115,7 @@ class AnnexController{
         });
 
         if (validator.fails()){
+            res.status(400);
             res.send(validator.errors);
             return;
         }
@@ -151,6 +153,7 @@ class AnnexController{
         const validator = new Validator({ annexId }, rules);
 
         if (validator.fails()){
+            res.status(400);
             res.send(validator.errors);
             return;
         }
