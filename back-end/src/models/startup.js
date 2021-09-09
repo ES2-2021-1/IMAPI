@@ -18,10 +18,14 @@ module.exports = (sequelize, DataTypes) => {
         as: 'owner',
         foreignKey: 'ownerId'
       });
-      Startup.hasOne(models.Step, {
+      Startup.belongsTo(models.Step, {
         as: 'currentStep',
         foreignKey: 'currentStepId'
       });
+      Startup.hasMany(models.Collaborator, {
+        as: 'collaborator',
+        foreignKey: 'id'
+      })
     }
   };
   Startup.init({
@@ -32,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     ownerId: DataTypes.INTEGER,
     mentorId: DataTypes.INTEGER,
     currentStepId: DataTypes.INTEGER,
+    logoPath: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Startup',

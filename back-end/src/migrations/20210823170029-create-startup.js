@@ -24,6 +24,9 @@ module.exports = {
       pitchLink: {
         type: Sequelize.STRING
       },
+      logoPath: {
+        type: Sequelize.STRING
+      },
       mentorId: {
         type: Sequelize.INTEGER,
         references: {
