@@ -40,7 +40,7 @@ class SubmissionController{
 
         Submission.create(req.body).then((response) => {
             res.status(201);
-            res.json({...response.dataValues});
+            res.json(response);
             return;
         }).catch((err) => {
             let ret = new Object();
