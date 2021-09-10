@@ -26,7 +26,7 @@ class StepController {
         let rules = {
             'moduleID': 'required|integer',
             'title': 'required|string',
-            'summary': 'text',
+            'summary': 'required|text',
             'content': 'text'
         };
 
@@ -40,7 +40,7 @@ class StepController {
 
         Step.create(req.body).then((response) => {
             res.status(201);
-            res.json({...response });
+            res.json({ response });
             return;
         }).catch((err) => {
             let ret = new Object();
@@ -85,7 +85,7 @@ class StepController {
         let rules = {
             'moduleID': 'required|integer',
             'title': 'required|string',
-            'summary': 'text',
+            'summary': 'required|text',
             'content': 'text'
         };
 
@@ -133,7 +133,7 @@ class StepController {
                 res.json("Deleted successfully");
                 return;
             }
-            res.status(200);
+            res.status(400);
             res.json("Not deleted");
             return;
 
