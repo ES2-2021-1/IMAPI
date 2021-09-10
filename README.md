@@ -18,7 +18,7 @@ git clone https://github.com/ES2-2021-1/IMAPI
 ```
 Note que para os passos seguintes espera-se que `Node.js` e `npm` estejam instalados. Mude para a pasta `back-end` gerada.
 ```
-cd IMAPI/backe-end
+cd IMAPI/back-end
 ```
 Com o comando abaixo, o `npm` irá utilizar o `package-lock.json` para resolver as dependências automaticamente.
 ```
