@@ -86,7 +86,7 @@ class SubmissionController{
     update (req, res) {
         let rules = {
             'submissionDate': 'required|date',
-            'feedBack' : 'required|email',
+            'feedBack' : 'text',
             'taskId': 'required|integer',
             'startupId': 'required|integer'
         };
