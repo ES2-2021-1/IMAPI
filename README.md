@@ -26,7 +26,7 @@ npm ci
 ```
 
 ### Inicialização
-Configure o seu servidor com a criação de um arquivo ``.env``. Pode-se usar de exemplo o ``.env.exemplo`` e criar automaticamente o arquivo com ``cp .env.example .env``. Exemplo de um possível ``.env`` configurado:
+Configure o seu servidor com a criação de um arquivo ``.env``. Pode-se usar de exemplo o ``.env.example`` e criar automaticamente o arquivo com ``cp .env.example .env``. Exemplo de um possível ``.env`` configurado:
 ```
 PORT=8082
 NODE_ENV="release"
@@ -45,7 +45,7 @@ npx sequelize-cli db:migrate
 
 Seu servidor está pronto para ir ao ar! Inicialize-o com:
 ```
-nodemon server.js
+npm start
 ```
 
 ## Documentação
