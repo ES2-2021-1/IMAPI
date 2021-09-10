@@ -16,9 +16,9 @@ Clone o repositório com o comando:
 ```
 git clone https://github.com/ES2-2021-1/IMAPI
 ```
-Note que para os passos seguintes espera-se que `Node.js` e `npm` estejam instalados. Mude para a raiz do diretório criado pelo git.
+Note que para os passos seguintes espera-se que `Node.js` e `npm` estejam instalados. Mude para a pasta `back-end` gerada.
 ```
-cd IMAPI
+cd IMAPI/backe-end
 ```
 Com o comando abaixo, o `npm` irá utilizar o `package-lock.json` para resolver as dependências automaticamente.
 ```
