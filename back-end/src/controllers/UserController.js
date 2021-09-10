@@ -39,6 +39,7 @@ class UserController{
         let validator = new Validator(req.body, rules);
 
         if (validator.fails()){
+            res.status(400);
             res.send(validator.errors);
             return;
         }
@@ -108,6 +109,7 @@ class UserController{
         let validator = new Validator(req.body, rules);
 
         if (validator.fails()){
+            res.status(400);
             res.send(validator.errors);
             return;
         }
