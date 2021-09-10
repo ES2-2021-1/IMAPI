@@ -38,7 +38,7 @@ DB_HOST= localhost
 DB_PORT= 5432
 ```
 
-Agora, popule o seu banco com os dados e metadados da INNE:
+Agora, crie as tabelas no banco com o comando:
 ```
 npx sequelize-cli db:migrate
 ```
