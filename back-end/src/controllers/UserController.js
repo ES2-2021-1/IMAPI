@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 class UserController{
     index (req, res) {
-        User.findAll().then((response) => {
+        User.findAll({attributes: {exclude: ['password']}}).then((response) => {
             res.status(200);
             res.json(response);
             return;
@@ -72,11 +72,14 @@ class UserController{
             {
                 where: {
                     id : req.params.id
+                },
+                attributes: {
+                    exclude: ['password']
                 }
             }
         ).then((response) => {
             res.status(200);
-            res.json(response);
+            res.json({response});
             return;
         }).catch((err) => {
             let ret = new Object();
