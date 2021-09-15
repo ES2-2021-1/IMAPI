@@ -7,6 +7,7 @@ const SubmissionRoutes = require('./SubmissionRoutes');
 const TaskRoutes = require('./TaskRoutes');
 const AnnexRoutes = require('./AnnexRoutes');
 const AuthRoutes = require('./AuthRoutes');
+const UploadRoutes = require('./UploadRoutes');
 
 router.use('/user', UserRoutes);
 router.use('/startup', StartupRoutes);
@@ -14,5 +15,6 @@ router.use('/annex', AnnexRoutes);
 router.use('/task', TaskRoutes);
 router.use('/auth', AuthRoutes);
 router.use('/submission', SubmissionRoutes);
+router.use('/upload', UploadRoutes);
 
 module.exports = router;
