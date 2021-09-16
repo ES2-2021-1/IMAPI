@@ -16,7 +16,7 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            abstract: {
+            summary: {
                 type: Sequelize.TEXT,
                 allowNull: false,
             },
