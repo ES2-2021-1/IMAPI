@@ -9,6 +9,7 @@ const AnnexRoutes = require('./AnnexRoutes');
 const AuthRoutes = require('./AuthRoutes');
 const StepRoutes = require('./StepRoutes');
 const ModuleRoutes = require('./ModuleRoutes');
+const UploadRoutes = require('./UploadRoutes');
 
 router.use('/user', UserRoutes);
 router.use('/startup', StartupRoutes);
@@ -17,6 +18,7 @@ router.use('/task', TaskRoutes);
 router.use('/auth', AuthRoutes);
 router.use('/submission', SubmissionRoutes);
 router.use('/step', StepRoutes);
-router.use('/module', StepRoutes);
+router.use('/module', ModuleRoutes);
+router.use('/upload', UploadRoutes);
 
 module.exports = router;
