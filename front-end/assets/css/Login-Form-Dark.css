@@ -1,5 +1,13 @@
+@media (max-width: 500px) {
+  .login-dark {
+    height: 100%;
+    background-size: cover;
+    position: relative;
+  }
+}
+
 .login-dark {
-  height: 1000px;
+  height: 100%;
   background-size: cover;
   position: relative;
 }
@@ -7,7 +15,7 @@
 .login-dark form {
   max-width: 320px;
   width: 90%;
-  background-color: #1e2833;
+  background-color: #1a1a1a;
   padding: 40px;
   border-radius: 4px;
   transform: translate(-50%, -50%);
@@ -69,11 +77,5 @@
 
 .login-dark form .btn-primary:active {
   transform: translateY(1px);
-}
-
-@media screen and (max-width: 480px) {
-  .login-dark form {
-    padding: 10px;
-  }
 }
 
