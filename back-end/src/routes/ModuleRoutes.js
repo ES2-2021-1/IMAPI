@@ -1,16 +1,16 @@
 const { Router } = require('express');
 const express = require('express');
 const router = express.Router();
-const StartupController = require('../controllers/StartupController');
+const ModuleController = require('../controllers/ModuleController');
 
-router.get('/', StartupController.index);
+router.get('/', ModuleController.index);
 
-router.post('/', StartupController.store);
+router.post('/', ModuleController.store);
 
-router.get('/:id', StartupController.show);
+router.get('/:id', ModuleController.show);
 
-router.patch('/:id', StartupController.update);
+router.patch('/:id', ModuleController.update);
 
-router.delete('/:id', StartupController.destroy);
+router.delete('/:id', ModuleController.destroy);
 
 module.exports = router;
