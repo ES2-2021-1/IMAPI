@@ -33,14 +33,14 @@ class UploadController {
     }
 
     async destroy (req, res) {
-        fs.unlink(req.body.path, (err)=> {
+        fs.unlink("../front-end/"+req.body.path, (err) => {
             if (err) {
                 res.status(400);
                 res.json({ response: "Could not delete file. Verify the path and try again."});
                 return;
             }
-        })
-        res.json({ response: "Deleted successfully"})
+            res.json({ response: "Deleted successfully"});
+        });
     } 
 }
 
