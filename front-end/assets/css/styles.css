@@ -176,3 +176,23 @@ form {
   }
 }
 
+.carousel-item > p {
+  width: 75%;
+}
+
+.card-startup {
+  max-width: 300px;
+}
+
+.card-desc {
+  margin-top: calc(56px + 15%);
+}
+
+.lista-usuarios {
+  width: min(100%, 450px);
+}
+
+.dropdown-menu.show {
+  display: flex;
+}
+
