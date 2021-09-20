@@ -1,18 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Startup"/>
-    <b-button variant="success">Button</b-button>
+    <!-- <BaseRaw title="Teste"/> -->
+    <Base title="Teste"/>
+
   </div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Base from "./layouts/Base.vue";
+// import BaseRaw from "./layouts/BaseRaw.vue";
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Base,
+    // BaseRaw
   }
 }
 </script>
