@@ -176,6 +176,10 @@ form {
   }
 }
 
+.carousel-item > a {
+  width: 75%;
+}
+
 .carousel-item > p {
   width: 75%;
 }
