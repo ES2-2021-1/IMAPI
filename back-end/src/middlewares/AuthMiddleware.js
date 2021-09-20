@@ -29,7 +29,7 @@ class AuthMiddleware {
                 res.json({ error: 'Authentication failed.' })
                 return;
             }
-            req.authUserId = 2;
+            req.authUserId = decoded.id;
             next();
         });
     }
