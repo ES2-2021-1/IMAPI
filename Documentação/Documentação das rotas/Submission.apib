@@ -1,0 +1,419 @@
+FORMAT: A1
+
+# IM API
+
+Descrição das rotas que fazem interface com o banco de dados.
+
+# Group Tasks
+
+Recursos relacionados ao Task na API.
+
+## Task collection [/api/submission/]
+
+### Retornar um Task [GET /api/submission/{id}]
+
+Retorna as informações de uma entrega em específico.
+
++ Parameters
+    + id : 1 (integer)
+        Id da entrega.
+        
++ Response 200 (application/json)
+
+    - Body
+            {
+                "id": 1,
+                "submissionDate": "2000-12-09T02:00:00.000Z",
+                "feedBack": "text",
+                "taskId": 3,
+                "startupId": 10,
+                "createdAt": "2021-09-20T18:17:37.266Z",
+                "updatedAt": "2021-09-20T18:17:37.266Z"
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "type" : "object",
+                        "additionalProperties" : false,
+                        "properties" : {
+                            "id" : {
+                                "type" : "integer"
+                            },
+                            "submissionDate" : {
+                                "type" : "string",
+                                "format" : "date"
+                            },
+                            "feedBack" : {
+                                "type" : "string"
+                            },
+                            "taskId" : {
+                                "type" : "integer"
+                            },
+                            "startupId" : {
+                                "type" : "integer"
+                            }
+                            "updatedAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            },
+                            "createdAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            }
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "TypeError" : [
+                        "Cannot read property "dataValues" of null"
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Retornar todos os Task [GET /api/submission]
+
+Retorna as informações de todos as entregas, em ordem crescente de acordo com a data da criação.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id": 1,
+                    "submissionDate": "2000-12-09T02:00:00.000Z",
+                    "feedBack": "text",
+                    "taskId": 3,
+                    "startupId": 10,
+                    "createdAt": "2021-09-20T18:17:37.266Z",
+                    "updatedAt": "2021-09-20T18:17:37.266Z"
+                },
+                {
+                    "id": 2,
+                    "submissionDate": "2021-09-20T03:00:00.000Z",
+                    "feedBack": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "taskId": 4,
+                    "startupId": 9,
+                    "createdAt": "2021-09-20T18:20:27.784Z",
+                    "updatedAt": "2021-09-20T18:28:57.011Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "submissionDate" : {
+                            "type" : "string",
+                            "format" : "date"
+                        },
+                        "feedBack" : {
+                            "type" : "string"
+                        },
+                        "taskId" : {
+                            "type" : "integer"
+                        },
+                        "startupId" : {
+                            "type" : "integer"
+                        }
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Criar um Task [POST]
+
+Cria uma nova entrega. O campo submissionDate é no formato MMDDYYYY
+
++ Request (application/json)
+
+    - Body
+
+            {
+                "submissionDate" : "2021/09/20",
+                "feedBack" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "taskId" : 3,
+                "startupId" : 10
+            }
+
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["submissionDate", "taskId", "startupId"],
+                "additionalProperties" : false,
+                "properties" : {
+                    "submissionDate" : {
+                        "type" : "string",
+                        "format" : "date"
+                    },
+                    "feedBack" : {
+                        "type" : "string"
+                    },
+                    "taskId" : {
+                        "type" : "integer"
+                    },
+                    "startupId" : {
+                        "type" : "integer"
+                    }
+                }
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            {
+                "id" : 1,
+                "submissionDate" : "2000-10-13T02:00:00.000Z",
+                "feedBack" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "taskId" : 3,
+                "startupId" : 10,
+                "updatedAt" : "2021-09-20T18:20:27.784Z",
+                "createdAt" : "2021-09-20T18:20:27.784Z"
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "type" : "object",
+                        "additionalProperties" : false,
+                        "properties" : {
+                            "id" : {
+                                "type" : "integer"
+                            },
+                            "submissionDate" : {
+                                "type" : "string",
+                                "format" : "date"
+                            },
+                            "feedBack" : {
+                                "type" : "string"
+                            },
+                            "taskId" : {
+                                "type" : "integer"
+                            },
+                            "startupId" : {
+                                "type" : "integer"
+                            }
+                            "updatedAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            },
+                            "createdAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            }
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "taskId": [
+                        "The taskId field is required."
+                    ]
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Editar um Task [PATCH /api/submission/{id}]
+
+Edita os dados de uma entrega já existente.
+
++ Parameters
+    + id : 1 (integer)
+        Id da entrega.
+        
++ Request (application/json)
+
+    - Body
+    
+            {
+                "submissionDate" : "2021/09/20",
+                "feedBack" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "taskId" : 3,
+                "startupId" : 10
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["submissionDate", "taskId", "startupId"],
+                "additionalProperties" : false,
+                "properties" : {
+                    "submissionDate" : {
+                        "type" : "string",
+                        "format" : "date"
+                    },
+                    "feedBack" : {
+                        "type" : "string"
+                    },
+                    "taskId" : {
+                        "type" : "integer"
+                    },
+                    "startupId" : {
+                        "type" : "integer"
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            "Update performed successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+
+            {
+                "errors": {
+                    "startupId": [
+                        "The startupId field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Remover um Task [DELETE /api/submission/{id}]
+
+Remove permanentemente uma entrega.
+
++ Parameters
+    + id : 1 (integer)
+        Id da entrega.
+        
+
++ Response 200 (application/json)
+
+    - Body
+    
+            "Deleted successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+    
+            "Not deleted"
+        

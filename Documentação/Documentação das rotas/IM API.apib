@@ -4,9 +4,2315 @@ FORMAT: A1
 
 Descrição das rotas que fazem interface com o banco de dados.
 
+# Group Annexes
+
+Recursos relacionados ao Annex na API.
+
+**Obs**: o campo `type` especifica o contexto do anexo. `type = 0` implica em um anexo de etapa, `type = 1` implica em um anexo de tarefa e `type = 2` implica em um anexo atrelado à entrega de uma tarefa.
+
+## Annex collection [/api/annex/]
+
+### Retornar um Annex [GET /api/annex/{id}]
+
+Retorna as informações de um anexo em específico.
+
+
++ Parameters
+    + id : 1 (integer)
+        Id do anexo.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            {
+                "id" : 2,
+                "path" : "arquivos/pastaTal",
+                "type" : 0,
+                "submissionId" : null,
+                "taskId" : null,
+                "stepId" : 3,
+                "createdAt" : "2021-09-20T20:21:09.535Z",
+                "updatedAt" : "2021-09-20T20:21:09.535Z"
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 1,
+                "maxItems" : 1,
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "path" : {
+                            "type" : "string"
+                        },
+                        "type" : {
+                            "enum" : [ 0, 1, 2 ]
+                        },
+                        "submissionId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "taskId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "stepId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            "Annex not found."
+
+### Retornar todos os Annexes [GET /api/annex]
+
+Retorna as informações de todos os anexos, em ordem crescente de acordo com a data da criação.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id" : 2,
+                    "path" : "arquivos/pastaTal",
+                    "type" : 0,
+                    "submissionId" : null,
+                    "taskId" : null,
+                    "stepId" : 3,
+                    "createdAt" : "2021-09-20T20:21:09.535Z",
+                    "updatedAt" : "2021-09-20T20:21:09.535Z"
+                },
+                {
+                    "id" : 4,
+                    "path" : "arquivos/pastaTal",
+                    "type" : 1,
+                    "submissionId" : null,
+                    "taskId" : 2,
+                    "stepId" : null,
+                    "createdAt" : "2021-09-20T20:21:09.535Z",
+                    "updatedAt" : "2021-09-20T20:21:09.535Z"
+                },
+                {
+                    "id" : 6,
+                    "path" : "arquivos/pastaTal",
+                    "type" : 0,
+                    "submissionId" : 8,
+                    "taskId" : null,
+                    "stepId" : null,
+                    "createdAt" : "2021-09-20T20:21:09.535Z",
+                    "updatedAt" : "2021-09-20T20:21:09.535Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "path" : {
+                            "type" : "string"
+                        },
+                        "type" : {
+                            "enum" : [ 0, 1, 2 ]
+                        },
+                        "submissionId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "taskId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "stepId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Criar um Annex [POST]
+
+Cria um novo anexo.
+
++ Request (application/json)
+
+    Uma explicação mais intuitiva alternativa ao Schema é:
+    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `stepId`, e os campos `taskId` e `submissionId` são, então, dispensáveis
+    - se um Annex possui `type = 1`, então obrigatoriamente ele precisa ter um campo `taskId`, e os campos `stepId` e `submissionId` são, então, dispensáveis
+    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
+
+    - Body
+
+            {
+                "path" : "arquivos/pastaTal",
+                "type" : 0,
+                "stepId" : 3
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["path", "type"],
+                "properties" : {
+                    "path" : {
+                        "type" : "string"
+                    },
+                    "type" : {
+                        "enum" : [ 0, 1, 2 ]
+                    },
+                    "stepId" : {
+                        "type" : "integer"
+                    },
+                    "taskId" : {
+                        "type" : "integer"
+                    },
+                    "submissionId" : {
+                        "type" : "integer"
+                    }
+                },
+                "anyOf" : [
+                    {
+                        "properties" : {
+                            "type" : {
+                                "const" : 0
+                            }
+                        },
+                        "required" : ["stepId"]
+                    },
+                    {
+                        "properties" : {
+                            "type" : {
+                                "const" : 1
+                            }
+                        },
+                        "required" : ["taskId"]
+                    },
+                    {
+                        "properties" : {
+                            "type" : {
+                                "const" : 2
+                            }
+                        },
+                        "required" : ["submissionId"]
+                    }
+                ]
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            {
+                "id" : 1,
+                "path" : "arquivos/pastaTal",
+                "type" : 2,
+                "submissionId" : 1,
+                "taskId" : null,
+                "stepId" : null,
+                "updatedAt" : "2021-09-20T18:50:53.663Z",
+                "createdAt" : "2021-09-20T18:50:53.663Z"
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "properties" : {
+                    "id" : {
+                        "type" : "integer"
+                    },
+                    "path" : {
+                        "type" : "string"
+                    },
+                    "type" : {
+                        "enum" : [ 0, 1, 2 ]
+                    },
+                    "submissionId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "taskId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "stepId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "updatedAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                    },
+                    "createdAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "type" : [
+                        "Type field not provided."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Editar um Annex [PATCH /api/annex/{id}]
+
+Edita os dados de um anexo já existente.
+
++ Parameters
+    + id : 1 (integer)
+        Id do anexo.
+        
++ Request (application/json)
+
+    Uma explicação mais intuitiva alternativa ao Schema é:
+    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `stepId`, e os campos `taskId` e `submissionId` são, então, dispensáveis
+    - se um Annex possui `type = 1`, então obrigatoriamente ele precisa ter um campo `taskId`, e os campos `stepId` e `submissionId` são, então, dispensáveis
+    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
+    
+    - Body
+    
+            {
+                "path" : "arquivos/pastaTal",
+                "submissionId" : 3
+            }
+    
+    - Schema
+        
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["path"],
+                "properties" : {
+                    "path" : {
+                        "type" : "string"
+                    },
+                    "type" : {
+                        "enum" : [ 0, 1, 2 ]
+                    },
+                    "submissionId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "taskId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "stepId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "updatedAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                    },
+                    "createdAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            "Update performed successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "path" : [
+                        "The path field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Remover um Annex [DELETE /api/annex/{id}]
+
+Remove permanentemente uma anexo.
+
++ Parameters
+    + id : 1 (integer)
+        Id do anexo.
+        
+
++ Response 200 (application/json)
+
+    - Body
+    
+            "Deleted successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+    
+            "Not deleted"
+        
+
+# Group Auth
+
+Recursos relacionados ao Auth na API.
+
+## Auth collection [/api/auth/]
+
+### Autenticar [POST]
+
+Faz uma autenticação.
+
++ Request (application/json)
+
+    - Body
+
+            {
+                "email" : "exemplo@email.com",
+                "password" : "string"
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["email", "password"],
+                "properties" : {
+                    "email" : {
+                        "type" : "string",
+                        "format" : "email"
+                    },
+                    "password" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            {
+                "token" : "eyaDiJIUzIFFsdasR5J9.eyJpZCI6NCwiaGyOTEwLCJzIxN234MTB4.-KKwBhmES2D2fCtsdV_3423EdzvvSM"
+            }
+        
+    - Schema
+
+                {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "token" : {
+                        "type" : "string"
+                    }
+                }
+            }
+
+        
++ Response 401 (application/json)
+
+    - Body
+            
+            {
+                "errors" : "Invalid email or password"
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "error" : {
+                        "const" : "Invalid email or password"
+                    }
+                }
+            }
+
+
+# Group Modules
+
+Recursos relacionados ao Module na API.
+
+## Module collection [/api/module/]
+
+### Retornar um Module [GET /api/module/{id}]
+
+Retorna as informações de um módulo em específico.
+
++ Parameters
+    + id : 1 (integer)
+        Id do módulo.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id": 1,
+                    "title": "Módulo de Iniciação Empresarial",
+                    "createdAt": "2021-09-19T19:44:33.743Z",
+                    "updatedAt": "2021-09-19T19:44:33.743Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 1,
+                "maxItems" : 1,
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "title" : {
+                            "type" : "string",
+                            "minLength" : 3,
+                            "maxLength" : 255
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Retornar todos os Module [GET /api/module]
+
+Retorna as informações de todos os módulos, em ordem crescente de acordo com a data da criação.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id": 1,
+                    "title": "Módulo de Iniciação Empresarial",
+                    "createdAt": "2021-09-19T19:44:33.743Z",
+                    "updatedAt": "2021-09-19T19:44:33.743Z"
+                },
+                {
+                    "id": 2,
+                    "title": "Seleção",
+                    "createdAt": "2021-09-19T21:22:31.052Z",
+                    "updatedAt": "2021-09-19T21:22:31.052Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "title" : {
+                            "type" : "string",
+                            "minLength" : 3,
+                            "maxLength" : 255
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Criar um Module [POST]
+
+Cria um novo módulo.
+
++ Request (application/json)
+
+    - Body
+    
+            {
+                "title" : "Seleção"
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["title"],
+                "properties" : {
+                    "title" : {
+                        "type" : "string",
+                        "minLength" : 3,
+                        "maxLength" : 255
+                    }
+                }
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            [
+                {
+                    "id": 1,
+                    "title": "Módulo de Iniciação Empresarial",
+                    "createdAt": "2021-09-19T19:44:33.743Z",
+                    "updatedAt": "2021-09-19T19:44:33.743Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 1,
+                "maxItems" : 1,
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "title" : {
+                            "type" : "string",
+                            "minLength" : 3,
+                            "maxLength" : 255
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors": {
+                    "title": [
+                        "The title field must be between 3 and 255 characters."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Editar um Module [PATCH /api/module/{id}]
+
+Edita os dados de um módulo já existente.
+
++ Parameters
+    + id : 1 (integer)
+        Id do módulo.
+        
++ Request (application/json)
+
+    - Body
+    
+            {
+                "title" : "Seleção"
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["title"],
+                "properties" : {
+                    "title" : {
+                        "type" : "string",
+                        "minLength" : 3,
+                        "maxLength" : 255
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            "Update performed successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors": {
+                    "title": [
+                        "The title field must be between 3 and 255 characters."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Remover um Module [DELETE /api/module/{id}]
+
+Remove permanentemente uma módulo.
+
++ Parameters
+    + id : 1 (integer)
+        Id do módulo.
+        
+
++ Response 200 (application/json)
+
+    - Body
+    
+            "Deleted successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+    
+            "Not deleted"
+        
+
+# Group Startups
+
+Recursos relacionados ao Startup na API.
+
+## Startup collection [/api/startup/]
+
+### Retornar um Startup [GET /api/startup/{id}]
+
+Retorna as informações de uma startup em específico.
+
++ Parameters
+    + id : 1 (integer)
+        Id da startup.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            {
+                "response": [
+                    {
+                        "id": 1,
+                        "name": "João da Silva",
+                        "email": "joao@mail.com",
+                        "phone": "(12)3456-7890",
+                        "cpf": "01234567891",
+                        "role": 0,
+                        "updatedAt" : "2021-09-09T20:29:03.625Z",
+                        "createdAt" : "2021-09-09T20:29:03.625Z"
+                    }
+                ]
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "type" : "array",
+                        "minItems" : 1,
+                        "maxItems" : 1,
+                        "items" : {
+                            "type" : "object",
+                            "additionalProperties" : false,
+                            "properties" : {
+                                "id" : {
+                                    "type" : "integer"
+                                },
+                                "name" : {
+                                    "type" : "string",
+                                    "minLength" : 3,
+                                    "maxLength" : 255
+                                },
+                                "email" : {
+                                    "type" : "string",
+                                    "format" : "email"
+                                },
+                                "phone" : {
+                                    "type" : "string",
+                                    "pattern" : "\\([0-9]{2}\\)[0-9]{4,5}\\-[0-9]{4}"
+                                },
+                                "cpf" : {
+                                    "type" : "string",
+                                    "pattern" : "[0-9]{11}" 
+                                },
+                                "role" : {
+                                    "type" : "integer",
+                                    "minimum" : 0,
+                                    "maximum" : 1
+                                },
+                                "updatedAt" : {
+                                    "type" : "string",
+                                    "pattern" :
+                                        "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                                },
+                                "createdAt" : {
+                                    "type" : "string",
+                                    "pattern" :
+                                        "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "response": []
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "type" : "array",
+                        "maxItems" : 0
+                        }
+                }
+
+            }
+
+### Retornar todos os Startup [GET /api/startup]
+
+Retorna as informações de todos os startups, em ordem crescente de acordo com a data da criação.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id": 1,
+                    "name": "João da Silva",
+                    "email": "joao@mail.com",
+                    "phone": "(12)3456-7890",
+                    "cpf": "01234567891",
+                    "role": 0,
+                    "createdAt": "2021-09-09T20:29:03.625Z",
+                    "updatedAt": "2021-09-09T20:29:03.625Z"
+                },
+                {
+                    "id": 2,
+                    "name": "Sílvia Pereira",
+                    "email": "silviap3231@mail.com",
+                    "phone": "(04)92222-1234",
+                    "cpf": "94832193102",
+                    "role": 0,
+                    "createdAt": "2021-09-11T00:00:22.895Z",
+                    "updatedAt": "2021-09-11T00:00:22.895Z"
+                },
+                {
+                    "id": 4,
+                    "name": "Robin Araújo",
+                    "email": "robin_a@mail.com",
+                    "phone": "(50)3563-1232",
+                    "cpf": "01333127891",
+                    "role": 1,
+                    "createdAt": "2021-09-11T00:01:54.292Z",
+                    "updatedAt": "2021-09-11T00:01:54.292Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "name" : {
+                            "type" : "string",
+                            "minLength" : 3,
+                            "maxLength" : 255
+                        },
+                        "email" : {
+                            "type" : "string",
+                            "format" : "email"
+                        },
+                        "phone" : {
+                            "type" : "string",
+                            "pattern" : "\\([0-9]{2}\\)[0-9]{4,5}\\-[0-9]{4}"
+                        },
+                        "cpf" : {
+                            "type" : "string",
+                            "pattern" : "[0-9]{11}" 
+                        },
+                        "role" : {
+                            "type" : "integer",
+                            "minimum" : 0,
+                            "maximum" : 1
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "response": []
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "type" : "array",
+                        "maxItems" : 0
+                        }
+                }
+
+            }
+
+### Criar um Startup [POST]
+
+Cria uma nova startup.
+
++ Request (application/json)
+
+    - Body
+    
+            {
+                "name": "Startup Bacana",
+                "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "state" : true,
+                "pitchLink" : "youtu.be/p1TcHLinK",
+                "mentorId" : 1,
+                "ownerId" : 1,
+                "currentStepId" : 1
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["name", "description", "state", 
+                              "ownerId"],
+                "properties" : {
+                    "name" : {
+                        "type" : "string",
+                        "minLength" : 3,
+                        "maxLength" : 255
+                    },
+                    "description" : {
+                        "type" : "string",
+                        "minLength" : 10,
+                        "maxLength" : 255
+                    },
+                    "state" : {
+                        "type" : "boolean"
+                    },
+                    "pitchLink" : {
+                        "type" : "string",
+                        "minLength" : 6,
+                        "maxLength" : 30
+                    },
+                    "mentorId" : {
+                        "type" : "integer"
+                    },
+                    "ownerId" : {
+                        "type" : "integer"
+                    },
+                    "currentStepId" : {
+                        "type" : "integer"
+                    }
+                }
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            {
+                "name": "Startup Bacana",
+                "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "state" : true,
+                "pitchLink" : "youtu.be/p1TcHLinK",
+                "mentorId" : 1,
+                "ownerId" : 1,
+                "currentStepId" : 1,
+                "updatedAt" : "2021-09-09T20:29:03.625Z",
+                "createdAt" : "2021-09-09T20:29:03.625Z"
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "properties" : {
+                    "name" : {
+                        "type" : "string",
+                        "minLength" : 3,
+                        "maxLength" : 255
+                    },
+                    "description" : {
+                        "type" : "string",
+                        "minLength" : 10,
+                        "maxLength" : 255
+                    },
+                    "state" : {
+                        "type" : "boolean"
+                    },
+                    "pitchLink" : {
+                        "type" : "string",
+                        "minLength" : 6,
+                        "maxLength" : 30
+                    },
+                    "mentorId" : {
+                        "type" : "integer"
+                    },
+                    "ownerId" : {
+                        "type" : "integer"
+                    },
+                    "currentStepId" : {
+                        "type" : "integer"
+                    },
+                    "updatedAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                    },
+                    "createdAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "state": [
+                        "The state field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Editar um Startup [PATCH /api/startup/{id}]
+
+Edita os dados de uma startup já existente.
+
++ Parameters
+    + id : 1 (integer)
+        Id da startup.
+        
+
++ Request (application/json)
+
+    - Body
+    
+            {
+                "name": "Startup Bacana",
+                "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "state" : true,
+                "pitchLink" : "youtu.be/p1TcHLinK",
+                "mentorId" : 3,
+                "ownerId" : 1,
+                "currentStepId" : 2
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "name" : {
+                        "type" : "string",
+                        "minLength" : 3,
+                        "maxLength" : 255
+                    },
+                    "email" : {
+                        "type" : "string",
+                        "format" : "email"
+                    },
+                    "password" : {
+                        "type" : "string",
+                        "minLength" : 6,
+                        "maxLength" : 30
+                    },
+                    "password_confirmation" : {
+                        "const": {
+                            "$data": "1/password"
+                        }
+                    },
+                    "phone" : {
+                        "type" : "string",
+                        "pattern" : "\\([0-9]{2}\\)[0-9]{4,5}\\-[0-9]{4}"
+                    },
+                    "cpf" : {
+                        "type" : "string",
+                        "pattern" : "[0-9]{11}" 
+                    },
+                    "role" : {
+                        "type" : "integer",
+                        "minimum" : 0,
+                        "maximum" : 1
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            "Update performed successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "state": [
+                        "The state field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Remover um Startup [DELETE /api/startup/{id}]
+
+Remove permanentemente uma startup.
+
++ Parameters
+    + id : 1 (integer)
+        Id do startup.
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            "Deleted successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+    
+            "Not deleted"
+        
+
+# Group Steps
+
+Recursos relacionados ao Step na API.
+
+## Step collection [/api/step/]
+
+### Retornar um Step [GET /api/step/{id}]
+
+Retorna as informações de uma etapa em específico.
+
++ Parameters
+    + id : 1 (integer)
+        Id da etapa.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id" : 1,
+                    "moduleId" : 1,
+                    "title" : "Algum título",
+                    "summary" : "Lorem ipsum dolor sit amet...",
+                    "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt" : "2021-09-20T14:41:32.668Z",
+                    "updatedAt" : "2021-09-20T14:41:32.668Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 1,
+                "maxItems" : 1,
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "moduleId" : {
+                            "type" : "integer"
+                        },
+                        "title" : {
+                            "type" : "string"
+                        },
+                        "summary" : {
+                            "type" : "string"
+                        },
+                        "content" : {
+                            "type" : "string"
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Retornar todos os Step [GET /api/step]
+
+Retorna as informações de todos as etapas, em ordem crescente de acordo com a data da criação.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id" : 1,
+                    "moduleId" : 1,
+                    "title" : "Algum título",
+                    "summary" : "Lorem ipsum dolor sit amet...",
+                    "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt" : "2021-09-20T14:41:32.668Z",
+                    "updatedAt" : "2021-09-20T14:41:32.668Z"
+                },
+                {
+                    "id" : 2,
+                    "moduleId" : 1,
+                    "title" : "Algum título 2",
+                    "summary" : "Lorem ipsum dolor sit amet...",
+                    "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt" : "2021-09-21T14:41:32.668Z",
+                    "updatedAt" : "2021-09-21T14:41:32.668Z"
+                },
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "moduleId" : {
+                            "type" : "integer"
+                        },
+                        "title" : {
+                            "type" : "string"
+                        },
+                        "summary" : {
+                            "type" : "string"
+                        },
+                        "content" : {
+                            "type" : "string"
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Criar um Step [POST]
+
+Cria uma nova etapa.
+
++ Request (application/json)
+
+    - Body
+    
+            {
+                "moduleId" : 1,
+                "title" : "Algum título",
+                "summary" : "Lorem ipsum dolor sit amet...",
+                "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }
+
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["moduleId", "title", "summary"],
+                "additionalProperties" : false,
+                "properties" : {
+                    "id" : {
+                        "type" : "integer"
+                    },
+                    "moduleId" : {
+                        "type" : "integer"
+                    },
+                    "title" : {
+                        "type" : "string",
+                        "minLength" : 3,
+                        "maxLength" : 255
+                    },
+                    "summary" : {
+                        "type" : "string"
+                    },
+                    "content" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            {
+                "response": {
+                    "id": 3,
+                    "moduleId": 1,
+                    "title": "Algum título",
+                    "summary": "Lorem ipsum dolor sit amet...",
+                    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "updatedAt": "2021-09-20T15:46:05.616Z",
+                    "createdAt": "2021-09-20T15:46:05.616Z"
+                }
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "type" : "object",
+                        "additionalProperties" : false,
+                        "properties" : {
+                            "id" : {
+                                "type" : "integer"
+                            },
+                            "moduleId" : {
+                                "type" : "integer"
+                            },
+                            "title" : {
+                                "type" : "string"
+                            },
+                            "summary" : {
+                                "type" : "string"
+                            },
+                            "content" : {
+                                "type" : "string"
+                            },
+                            "updatedAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            },
+                            "createdAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            }
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "moduleId" : [
+                        "The moduleId field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Editar um Step [PATCH /api/step/{id}]
+
+Edita os dados de uma etapa já existente.
+
++ Parameters
+    + id : 1 (integer)
+        Id da etapa.
+        
++ Request (application/json)
+
+    - Body
+    
+            {
+                "moduleId": 2,
+                "title": "Algum título 2",
+                "summary": "Lorem ipsum dolor sit amet...",
+                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["moduleId", "title", "summary"],
+                "additionalProperties" : false,
+                "properties" : {
+                    "moduleId" : {
+                        "type" : "integer"
+                    },
+                    "title" : {
+                        "type" : "string",
+                        "minLength" : 3,
+                        "maxLength" : 255
+                    },
+                    "summary" : {
+                        "type" : "string"
+                    },
+                    "content" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            "Update performed successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+
+            {
+                "errors" : {
+                    "moduleId" : [
+                        "The moduleId field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Remover um Step [DELETE /api/step/{id}]
+
+Remove permanentemente uma etapa.
+
++ Parameters
+    + id : 1 (integer)
+        Id da etapa.
+        
+
++ Response 200 (application/json)
+
+    - Body
+    
+            "Deleted successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+    
+            "Not deleted"
+        
+
+# Group Tasks
+
+Recursos relacionados ao Task na API.
+
+## Task collection [/api/task/]
+
+### Retornar um Task [GET /api/task/{id}]
+
+Retorna as informações de uma tarefa em específico.
+
++ Parameters
+    + id : 1 (integer)
+        Id da tarefa.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            {
+                "id": 1,
+                "title": "Tarefa 1",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "stepId": 3,
+                "createdAt": "2021-09-20T17:47:24.865Z",
+                "updatedAt": "2021-09-20T17:52:33.586Z"
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "type" : "object",
+                        "additionalProperties" : false,
+                        "properties" : {
+                            "id" : {
+                                "type" : "integer"
+                            },
+                            "title" : {
+                                "type" : "string"
+                            },
+                            "description" : {
+                                "type" : "string"
+                            },
+                            "stepId" : {
+                                "type" : "integer"
+                            },
+                            "updatedAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            },
+                            "createdAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            }
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors": {
+                    "TypeError": [
+                        "Cannot read property 'dataValues' of null"
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Retornar todos os Task [GET /api/task]
+
+Retorna as informações de todos as tarefas, em ordem crescente de acordo com a data da criação.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id": 1,
+                    "title": "Tarefa 1",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "stepId": 3,
+                    "createdAt": "2021-09-20T17:47:24.865Z",
+                    "updatedAt": "2021-09-20T17:52:33.586Z"
+                },
+                {
+                    "id": 2,
+                    "title": "Tarefa 2",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "stepId": 5,
+                    "createdAt": "2021-09-21T17:47:24.865Z",
+                    "updatedAt": "2021-09-21T17:52:33.586Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "title" : {
+                            "type" : "string"
+                        },
+                        "description" : {
+                            "type" : "string"
+                        },
+                        "stepId" : {
+                            "type" : "integer"
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            }
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Criar um Task [POST]
+
+Cria uma nova tarefa.
+
++ Request (application/json)
+
+    - Body
+    
+            {
+                "title" : "Tarefa 1",
+                "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "stepId" : 1
+            }
+
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["title", "description", "stepId"],
+                "additionalProperties" : false,
+                "properties" : {
+                    "title" : {
+                        "type" : "string"
+                    },
+                    "description" : {
+                        "type" : "string"
+                    },
+                    "stepId" : {
+                        "type" : "integer"
+                    }
+                }
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            {
+                "id": 1,
+                "title": "Tarefa 1",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "stepId": 1,
+                "updatedAt": "2021-09-20T17:47:24.865Z",
+                "createdAt": "2021-09-20T17:47:24.865Z"
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "type" : "object",
+                        "additionalProperties" : false,
+                        "properties" : {
+                            "id" : {
+                                "type" : "integer"
+                            },
+                            "title" : {
+                                "type" : "string"
+                            },
+                            "description" : {
+                                "type" : "string"
+                            },
+                            "stepId" : {
+                                "type" : "integer"
+                            },
+                            "updatedAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            },
+                            "createdAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            }
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "stepId" : [
+                        "The stepId field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Editar um Task [PATCH /api/task/{id}]
+
+Edita os dados de uma tarefa já existente.
+
++ Parameters
+    + id : 1 (integer)
+        Id da tarefa.
+        
++ Request (application/json)
+
+    - Body
+    
+            {
+                "title" : "Tarefa 1",
+                "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "stepId" : 1
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["title", "description", "stepId"],
+                "additionalProperties" : false,
+                "properties" : {
+                    "title" : {
+                        "type" : "string"
+                    },
+                    "description" : {
+                        "type" : "string"
+                    },
+                    "stepId" : {
+                        "type" : "integer"
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            "Update performed successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+
+            {
+                "errors" : {
+                    "stepId" : [
+                        "The stepId field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Remover um Task [DELETE /api/task/{id}]
+
+Remove permanentemente uma tarefa.
+
++ Parameters
+    + id : 1 (integer)
+        Id da tarefa.
+        
+
++ Response 200 (application/json)
+
+    - Body
+    
+            "Deleted successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+    
+            "Not deleted"
+        
+
+# Group Upload
+
+Recursos relacionados ao Upload na API.
+
+## Upload collection [/api/upload/]
+
+### Criar um Upload [POST]
+
+Faz o upload de um arquivo.
+
++ Request
+
+    Simplificando o processo de upload, é preciso que o form tenha um campo com `name="upload"`, de tipo `file`. Mais informações para a compreensão do `Body` podem ser obtidas [aqui](https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4).
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: multipart/form-data; boundary={boundary value}
+
+    - Body
+
+            --{boundary value}
+            Content-Disposition: form-data; name='upload'; filename={nome do arquivo}
+            Content-Type: {de acordo com o arquivo em questão}
+
+            {file content}
+            --{boundary value}
+        
++ Response 201 (application/json)
+
+    - Body
+
+            {
+                "path" : "public/uploads/1632174258117-564816431-457092851.jpg"
+            }
+            
+        
+    - Schema
+
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "path" : {
+                        "type" : "string"
+                    }
+                }
+            }
+
+        
++ Response 401 (application/json)
+
+    - Body
+            
+            {
+                "error": "Could not save file."
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "error" : {
+                        "const" : "Could not save file."
+                    }
+                }
+            }
+
+### Remover um Upload [DELETE /api/upload/]
+
+Remove permanentemente um arquivo.
+
++ Request (application/json)
+
+    - Body
+
+            {
+                "path" : "public/uploads/1632174258117-564816431-457092851.jpg"
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "path" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            {
+                "response": "Deleted successfully"
+            }
+        
+    - Schema
+
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "const" : "Deleted successfully"
+                    }
+                }
+            }
+        
++ Response 401 (application/json)
+
+    - Body
+            
+            {
+                "errors" : "Invalid email or password"
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "error" : {
+                        "const" : "Invalid email or password"
+                    }
+                }
+            }
+
+
+
 # Group Users
 
 Recursos relacionados ao User na API.
+
+**Obs**: o campo `role` especifica o nível de acesso e controle do usuário. `role = 0` implica em um usuário administrador, que tem acesso as ferramentas de administração e pode tomar liderança de uma ou várias Startups, como mentor. `role = 1` implica em um usuário comum.
 
 ## User collection [/api/user/]
 
@@ -73,9 +2379,7 @@ Retorna as informações de um usuário em específico.
                                     "pattern" : "[0-9]{11}" 
                                 },
                                 "role" : {
-                                    "type" : "integer",
-                                    "minimum" : 0,
-                                    "maximum" : 1
+                                    "enum" : [ 0, 1 ]
                                 },
                                 "updatedAt" : {
                                     "type" : "string",
@@ -187,9 +2491,7 @@ Retorna as informações de todos os usuários, em ordem crescente de acordo com
                             "pattern" : "[0-9]{11}" 
                         },
                         "role" : {
-                            "type" : "integer",
-                            "minimum" : 0,
-                            "maximum" : 1
+                            "enum" : [ 0, 1 ]
                         },
                         "updatedAt" : {
                             "type" : "string",
@@ -233,6 +2535,8 @@ Retorna as informações de todos os usuários, em ordem crescente de acordo com
 Cria um novo usuário.
 
 + Request (application/json)
+
+    
 
     - Body
     
@@ -282,9 +2586,7 @@ Cria um novo usuário.
                         "pattern" : "[0-9]{11}" 
                     },
                     "role" : {
-                        "type" : "integer",
-                        "minimum" : 0,
-                        "maximum" : 1
+                        "enum" : [ 0, 1 ]
                     }
                 }
             }
@@ -336,9 +2638,7 @@ Cria um novo usuário.
                         "pattern" : "[0-9]{11}" 
                     },
                     "role" : {
-                        "type" : "integer",
-                        "minimum" : 0,
-                        "maximum" : 1
+                        "enum" : [ 0, 1 ]
                     },
                     "updatedAt" : {
                         "type" : "string",
@@ -393,7 +2693,7 @@ Cria um novo usuário.
 
 ### Editar um User [PATCH /api/user/{id}]
 
-Cria um novo usuário.
+Edita os dados de um usuário já existente.
 
 + Parameters
     + id : 1 (integer)
@@ -446,14 +2746,12 @@ Cria um novo usuário.
                         "pattern" : "[0-9]{11}" 
                     },
                     "role" : {
-                        "type" : "integer",
-                        "minimum" : 0,
-                        "maximum" : 1
+                        "enum" : [ 0, 1 ]
                     }
                 }
             }
         
-+ Response 200 (text/html)
++ Response 200 (application/json)
 
     - Body
     
@@ -499,22 +2797,19 @@ Cria um novo usuário.
 
 ### Remover um User [DELETE /api/user/{id}]
 
-Cria um novo usuário.
+Remove permanentemente um usuário.
 
 + Parameters
     + id : 1 (integer)
         Id do usuário.
         
-
-
-        
-+ Response 200 (text/html)
++ Response 200 (application/json)
 
     - Body
     
             "Deleted successfully"
         
-+ Response 400 (text/html)
++ Response 400 (application/json)
 
     - Body
     

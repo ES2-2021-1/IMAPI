@@ -1,0 +1,410 @@
+FORMAT: A1
+
+# IM API
+
+Descrição das rotas que fazem interface com o banco de dados.
+
+# Group Steps
+
+Recursos relacionados ao Step na API.
+
+## Step collection [/api/step/]
+
+### Retornar um Step [GET /api/step/{id}]
+
+Retorna as informações de uma etapa em específico.
+
++ Parameters
+    + id : 1 (integer)
+        Id da etapa.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id" : 1,
+                    "moduleId" : 1,
+                    "title" : "Algum título",
+                    "summary" : "Lorem ipsum dolor sit amet...",
+                    "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt" : "2021-09-20T14:41:32.668Z",
+                    "updatedAt" : "2021-09-20T14:41:32.668Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 1,
+                "maxItems" : 1,
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "moduleId" : {
+                            "type" : "integer"
+                        },
+                        "title" : {
+                            "type" : "string"
+                        },
+                        "summary" : {
+                            "type" : "string"
+                        },
+                        "content" : {
+                            "type" : "string"
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Retornar todos os Step [GET /api/step]
+
+Retorna as informações de todos as etapas, em ordem crescente de acordo com a data da criação.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id" : 1,
+                    "moduleId" : 1,
+                    "title" : "Algum título",
+                    "summary" : "Lorem ipsum dolor sit amet...",
+                    "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt" : "2021-09-20T14:41:32.668Z",
+                    "updatedAt" : "2021-09-20T14:41:32.668Z"
+                },
+                {
+                    "id" : 2,
+                    "moduleId" : 1,
+                    "title" : "Algum título 2",
+                    "summary" : "Lorem ipsum dolor sit amet...",
+                    "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "createdAt" : "2021-09-21T14:41:32.668Z",
+                    "updatedAt" : "2021-09-21T14:41:32.668Z"
+                },
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "moduleId" : {
+                            "type" : "integer"
+                        },
+                        "title" : {
+                            "type" : "string"
+                        },
+                        "summary" : {
+                            "type" : "string"
+                        },
+                        "content" : {
+                            "type" : "string"
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Criar um Step [POST]
+
+Cria uma nova etapa.
+
++ Request (application/json)
+
+    - Body
+    
+            {
+                "moduleId" : 1,
+                "title" : "Algum título",
+                "summary" : "Lorem ipsum dolor sit amet...",
+                "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }
+
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["moduleId", "title", "summary"],
+                "additionalProperties" : false,
+                "properties" : {
+                    "id" : {
+                        "type" : "integer"
+                    },
+                    "moduleId" : {
+                        "type" : "integer"
+                    },
+                    "title" : {
+                        "type" : "string",
+                        "minLength" : 3,
+                        "maxLength" : 255
+                    },
+                    "summary" : {
+                        "type" : "string"
+                    },
+                    "content" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            {
+                "response": {
+                    "id": 3,
+                    "moduleId": 1,
+                    "title": "Algum título",
+                    "summary": "Lorem ipsum dolor sit amet...",
+                    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "updatedAt": "2021-09-20T15:46:05.616Z",
+                    "createdAt": "2021-09-20T15:46:05.616Z"
+                }
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "type" : "object",
+                        "additionalProperties" : false,
+                        "properties" : {
+                            "id" : {
+                                "type" : "integer"
+                            },
+                            "moduleId" : {
+                                "type" : "integer"
+                            },
+                            "title" : {
+                                "type" : "string"
+                            },
+                            "summary" : {
+                                "type" : "string"
+                            },
+                            "content" : {
+                                "type" : "string"
+                            },
+                            "updatedAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            },
+                            "createdAt" : {
+                                "type" : "string",
+                                "pattern" :
+                                    "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                            }
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "moduleId" : [
+                        "The moduleId field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Editar um Step [PATCH /api/step/{id}]
+
+Edita os dados de uma etapa já existente.
+
++ Parameters
+    + id : 1 (integer)
+        Id da etapa.
+        
++ Request (application/json)
+
+    - Body
+    
+            {
+                "moduleId": 2,
+                "title": "Algum título 2",
+                "summary": "Lorem ipsum dolor sit amet...",
+                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["moduleId", "title", "summary"],
+                "additionalProperties" : false,
+                "properties" : {
+                    "moduleId" : {
+                        "type" : "integer"
+                    },
+                    "title" : {
+                        "type" : "string",
+                        "minLength" : 3,
+                        "maxLength" : 255
+                    },
+                    "summary" : {
+                        "type" : "string"
+                    },
+                    "content" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            "Update performed successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+
+            {
+                "errors" : {
+                    "moduleId" : [
+                        "The moduleId field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Remover um Step [DELETE /api/step/{id}]
+
+Remove permanentemente uma etapa.
+
++ Parameters
+    + id : 1 (integer)
+        Id da etapa.
+        
+
++ Response 200 (application/json)
+
+    - Body
+    
+            "Deleted successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+    
+            "Not deleted"
+        
