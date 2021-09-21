@@ -25,7 +25,7 @@ class SubmissionController{
     store (req, res) {
         let rules = {
             'submissionDate': 'required|date',
-            'feedBack' : 'text',
+            'feedBack' : 'string',
             'taskId': 'required|integer',
             'startupId': 'required|integer'
         };
@@ -86,7 +86,7 @@ class SubmissionController{
     update (req, res) {
         let rules = {
             'submissionDate': 'required|date',
-            'feedBack' : 'text',
+            'feedBack' : 'string',
             'taskId': 'required|integer',
             'startupId': 'required|integer'
         };
