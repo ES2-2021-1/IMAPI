@@ -32,6 +32,15 @@ class AnnexController{
             'stepId': 'required_if:type,0|integer|min:1',
         };
 
+        // TODO: tratar isso de forma mais elegante. Este if impede que a chamada de
+        // data.type.toString() gere um erro no servidor.
+        if(data.type == undefined)
+        {
+            res.status(400);
+            res.send(JSON.parse("{\"errors\": {\"type\":[\"The type field is required.\"]}}"));
+            return;
+        }
+
         const validator = new Validator({ ...data, type: data.type.toString() }, rules);
 
         if (validator.fails()){

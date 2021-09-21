@@ -15,9 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'moduleId'
       });
       
+      Step.belongsTo(models.Startup, {
+        as: 'currentStep',
+        foreignKey: 'id'
+      });
+      
       Step.hasOne(models.Task, {
         as: 'task',
-        foreignKey: 'stepId'
+        foreignKey: 'id'
       });
     }
   };

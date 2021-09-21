@@ -9,6 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 dotenv.config();
+
 app.use("/api", routes);
 
 module.exports = app;
