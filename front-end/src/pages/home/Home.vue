@@ -12,22 +12,69 @@
             </div>
         </div>
 
+    
+
+            <StartupBox  v-for ="item in items" :key = 'item.id'
+            :img="require('@/assets/img/logo sample.png')"
+            :title= "item.name"
+            :description= "item.description"
+            :status= "item.currentStepId" />
+
+    <!--
         <StartupBox :img="require('@/assets/img/logo sample.png')" title="Título da Startup" description="Descrição curta sobre a Startup, lorem ipsum, simus harahair manesacas" status="Em avaliação" />
 
-        <StartupBox :img="require('@/assets/img/Logo_ÍCONE BRANCO.png')" title="Título da Startup" description="Descrição curta sobre a Startup, lorem ipsum, simus harahair manesacas" status="Fase 1 - Documentos" />
+        <StartupBox :img="require('@/assets/img/Logo_ÍCONE BRANCO.png')" title="Título da Startup" description="Descrição ttt curta sobre a Startup, lorem ipsum, simus harahair manesacas" status="Fase 1 - Documentos" />
 
         <StartupBox :img="require('@/assets/img/Logo_ÍCONE BRANCO.png')" title="Título da Startup" description="Descrição curta sobre a Startup, lorem ipsum, simus harahair manesacas" status="Ideia Recusada" />
+    -->
     </div>
   </div>
 </template>
 
 <script>
+
 import StartupBox from "./components/StartupBox.vue";
+import Vue from 'vue'
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+Vue.use(VueAxios, axios)
 
 export default {
+
     name: 'Home',
     components: {
         StartupBox,
+    },
+    
+    data(){
+
+        return {items: undefined}
+    } ,
+
+    mounted() {
+        var userId = 1
+        
+        Vue.axios.get('http://localhost:8082/api/startup/').then(
+
+            (resp) => {
+                var startups = [];
+                console.log(resp.data)
+
+                for (var startup in resp.data){
+
+                    if (resp.data[startup].ownerId== userId){
+                        
+                        startups.push(resp.data[startup])
+
+                    }
+                }
+
+                this.items = startups;
+                
+            }
+        )
+
+
     }
 }
 </script>
