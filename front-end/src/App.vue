@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <body id="app">
     <!-- <BaseRaw title="Teste"/> -->
     <Base title="Teste"/>
 
-  </div>
+  </body>
 
 </template>
 
@@ -28,6 +28,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

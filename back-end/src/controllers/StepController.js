@@ -24,10 +24,10 @@ class StepController {
 
     store(req, res) {
         let rules = {
-            'moduleID': 'required|integer',
+            'moduleId': 'required|integer',
             'title': 'required|string',
-            'summary': 'required|text',
-            'content': 'text'
+            'summary': 'required|string',
+            'content': 'string'
         };
 
         let validator = new Validator(req.body, rules);

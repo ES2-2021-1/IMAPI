@@ -1,5 +1,5 @@
 <template>
-    <b-container class="pt-5">
+    <b-container>
         <b-row>
             <div class="col justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center justify-content-xxl-center" >
                 <div class="card">
@@ -12,7 +12,7 @@
             <div class="col-md-8">
                 <b-progress :value="75" :max="100" show-progress animated primary></b-progress>
                 <div class="accordion" role="tablist" id="accordion-1">
-                    <Module/>
+                    <Module v-for="module in modules" :key="module.id" :module="module"/>
                 </div>
             </div>
         </b-row>
@@ -27,6 +27,20 @@ export default {
 	components: {
         Module
 	},
+    data() {
+        return {
+            modules: [],
+        }
+    },
+    methods: {
+        async fetchModules() {
+            let { data } = await window.axios.get(`http://localhost:8082/api/module/`);
+            this.modules = data;
+        },
+    },
+    created() {
+        this.fetchModules();
+    },
 }
 </script>
 
