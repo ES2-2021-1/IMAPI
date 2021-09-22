@@ -12,7 +12,7 @@ import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue);
 
-window.axios =  Vue.axios;
+window.axios =  Vue.axios.create({baseURL: 'http://localhost:8082/'});
 
 new Vue({
   render: h => h(App),
