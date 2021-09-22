@@ -1,22 +1,22 @@
 <template>
-  <div>
+  <div style="background-image: radial-gradient(#39b72e 2px, transparent 2px);background-size: 27px 27px;background-color: #9be268;">
     <FeatureBoxed/>
-    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fprofitworks.ca%2Fimages%2FHome-Page%2FPROFITWORKS-Closed-LOOP-SEO-VERSION-3.gif&amp;f=1&amp;nofb=1" style="width: 100%;user-select: none;pointer-events: none;">
-    <Testimonials/>
+    <PhotoGallery/>
   </div>
-  
-
 </template>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/bs-init.js"></script>
 
 <script>
 import FeatureBoxed from "./components/FeatureBoxed.vue";
-import Testimonials from "./components/Testimonials.vue";
+import PhotoGallery from "./components/PhotoGallery.vue";
 
 export default {
   name: 'Index',
   components: {
     FeatureBoxed,
-    Testimonials
+    PhotoGallery
   }
 }
 </script>
