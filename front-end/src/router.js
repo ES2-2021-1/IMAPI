@@ -6,6 +6,7 @@ import NewStartup from './pages/newStartup/NewStartup.vue';
 import Register from './pages/register/Register.vue';
 import StartupDetails from './pages/startupDetails/StartupDetails.vue';
 import Login from './pages/login/Login.vue';
+import Error from './pages/error/Error.vue';
 
 export default new VueRouter({
     mode: 'history',
@@ -41,5 +42,9 @@ export default new VueRouter({
             name: 'register',
             component: Register
         },
+        {   path: "*", 
+            name: 'error',
+            component: Error 
+        }
     ]
 });
