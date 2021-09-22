@@ -46,7 +46,6 @@ export default {
 
             (resp) => {
                 var startups = [];
-                console.log(resp.data)
 
                 for (var startup in resp.data){
 
