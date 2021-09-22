@@ -1,0 +1,83 @@
+FORMAT: A1
+
+# IM API
+
+Descrição das rotas que fazem interface com o banco de dados.
+
+# Group Auth
+
+Recursos relacionados ao Auth na API.
+
+## Auth collection [/api/auth/]
+
+### Autenticar [POST]
+
+Faz uma autenticação.
+
++ Request (application/json)
+
+    - Body
+
+            {
+                "email" : "exemplo@email.com",
+                "password" : "string"
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["email", "password"],
+                "properties" : {
+                    "email" : {
+                        "type" : "string",
+                        "format" : "email"
+                    },
+                    "password" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            {
+                "token" : "eyaDiJIUzIFFsdasR5J9.eyJpZCI6NCwiaGyOTEwLCJzIxN234MTB4.-KKwBhmES2D2fCtsdV_3423EdzvvSM"
+            }
+        
+    - Schema
+
+                {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "token" : {
+                        "type" : "string"
+                    }
+                }
+            }
+
+        
++ Response 401 (application/json)
+
+    - Body
+            
+            {
+                "errors" : "Invalid email or password"
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "error" : {
+                        "const" : "Invalid email or password"
+                    }
+                }
+            }

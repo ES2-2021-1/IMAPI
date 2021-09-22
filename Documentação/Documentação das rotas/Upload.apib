@@ -1,0 +1,142 @@
+FORMAT: A1
+
+# IM API
+
+Descrição das rotas que fazem interface com o banco de dados.
+
+# Group Upload
+
+Recursos relacionados ao Upload na API.
+
+## Upload collection [/api/upload/]
+
+### Criar um Upload [POST]
+
+Faz o upload de um arquivo.
+
++ Request
+
+    Simplificando o processo de upload, é preciso que o form tenha um campo com `name="upload"`, de tipo `file`. Mais informações para a compreensão do `Body` podem ser obtidas [aqui](https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4).
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: multipart/form-data; boundary={boundary value}
+
+    - Body
+
+            --{boundary value}
+            Content-Disposition: form-data; name='upload'; filename={nome do arquivo}
+            Content-Type: {de acordo com o arquivo em questão}
+
+            {file content}
+            --{boundary value}
+        
++ Response 201 (application/json)
+
+    - Body
+
+            {
+                "path" : "public/uploads/1632174258117-564816431-457092851.jpg"
+            }
+            
+        
+    - Schema
+
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "path" : {
+                        "type" : "string"
+                    }
+                }
+            }
+
+        
++ Response 401 (application/json)
+
+    - Body
+            
+            {
+                "error": "Could not save file."
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "error" : {
+                        "const" : "Could not save file."
+                    }
+                }
+            }
+
+### Remover um Upload [DELETE /api/upload/]
+
+Remove permanentemente um arquivo.
+
++ Request (application/json)
+
+    - Body
+
+            {
+                "path" : "public/uploads/1632174258117-564816431-457092851.jpg"
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "path" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            {
+                "response": "Deleted successfully"
+            }
+        
+    - Schema
+
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "response" : {
+                        "const" : "Deleted successfully"
+                    }
+                }
+            }
+        
++ Response 401 (application/json)
+
+    - Body
+            
+            {
+                "errors" : "Invalid email or password"
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "error" : {
+                        "const" : "Invalid email or password"
+                    }
+                }
+            }
