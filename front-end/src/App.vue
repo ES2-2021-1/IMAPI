@@ -1,26 +1,28 @@
 <template>
   <div id="app">
-    <BaseRaw title="Teste"/>
-    <!-- <Base title="Teste"/> -->
+    <!-- <BaseRaw title="Teste"/> -->
+    <Base title="Teste"/>
 
   </div>
 
 </template>
 
 <script>
-// import Base from "./layouts/Base.vue";
-import BaseRaw from "./layouts/BaseRaw.vue";
+import Base from "./layouts/Base.vue";
+// import BaseRaw from "./layouts/BaseRaw.vue";
 
 
 export default {
   name: 'App',
   components: {
-    // Base,
-    BaseRaw
+    Base,
+    // BaseRaw
   }
 }
 </script>
 
 <style>
-
+  body{
+    background-image: radial-gradient(#39b72e 2px, transparent 2px);background-size: 27px 27px;background-color: #9be268 !important; 
+  }
 </style>

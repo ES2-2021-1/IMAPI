@@ -8,7 +8,7 @@
 			<div class="mt-3"><input v-model="name" class="form-control" type="text" name="name" placeholder="Nome" autocomplete="off" required></div>
 			<small class="text-danger">{{ nameError }}</small>
 			
-			<div class="mt-3"><input v-model="email"  class="form-control" type="text" name="email" placeholder="Email" autocomplete="off" required></div>
+			<div class="mt-3"><input v-model="email"  class="form-control" type="email" name="email" placeholder="Email" autocomplete="off" required></div>
 			<small class="text-danger">{{ emailError }}</small>
 			
 			<div class="mt-3"><input v-model="cpf" v-mask="'###.###.###-##'"  class="form-control" type="text" name="cpf" placeholder="Cpf" autocomplete="off" required></div>
@@ -74,10 +74,11 @@ export default {
 			};
 
 			window.axios.post( 
-				'http://localhost:7272/api/user',
+				'api/user',
 				bodyParameters
-				).then( res=> {
-					console.log(res)
+				).then(()=> {
+					console.log("User Created")
+					this.$router.push({ name: 'login' })
 				}).catch( err => {
 					if(err.response.data.errors.name){
 						this.nameError = err.response.data.errors.name[0];

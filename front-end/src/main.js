@@ -18,11 +18,10 @@ Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.use(VueRouter)
 
-window.axios =  Vue.axios.create({baseURL: 'http://localhost:8082/'});
+window.axios = Vue.axios.create({ baseURL: 'http://localhost:8082/' });
+window.router = VueRouter;
 
 Vue.use(VueMask);
-
-window.axios = Vue.axios;
 
 new Vue({
   render: h => h(App),
