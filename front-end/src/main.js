@@ -15,7 +15,6 @@ import  router from './router';
 
 Vue.use(VueAxios, axios);
 
-Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue);
 Vue.use(VueRouter)
 
