@@ -11,12 +11,15 @@ Ferramentas necessárias para executar a solução:
 - [Node.js](https://nodejs.org/en/) 
 - [Vue.js](https://vuejs.org/)
 
-### Instalação
-Clone o repositório com o comando:
+Apesar de que usaremos o `npm` para este tutorial, também pode-se fazer uso do `yarn`.
+A execução da aplicação consiste em três etapas: configuração do SGBD, configuração do servidor do SGBD e configuração do servidor da aplicação.
+Antes de qualquer coisa, clone o repositório com o comando:
 ```
 git clone https://github.com/ES2-2021-1/IMAPI
 ```
-Note que para os passos seguintes espera-se que `Node.js` e `npm` estejam instalados. Mude para a pasta `back-end` gerada.
+
+### Configurando o banco de dados
+Note que para os passos seguintes espera-se que `Node.js` e `npm` já estejam instalados. Mude para a pasta `back-end` gerada.
 ```
 cd IMAPI/back-end
 ```
@@ -25,7 +28,7 @@ Com o comando abaixo, o `npm` irá utilizar o `package-lock.json` para resolver 
 npm ci
 ```
 
-### Inicialização
+### Configurando o servidor do SGBD
 Configure o seu servidor com a criação de um arquivo ``.env``. Pode-se usar de exemplo o ``.env.example`` e criar automaticamente o arquivo com ``cp .env.example .env``. Exemplo de um possível ``.env`` configurado:
 ```
 PORT=8082
@@ -48,12 +51,31 @@ Seu servidor está pronto para ir ao ar! Inicialize-o com:
 npm start
 ```
 
+### Configurando o servidor da aplicação
+Em um terminal, clone o repositório e navegue para a pasta `front-end` na raiz do repositório. Caso esteja usando a mesma máquina para rodar ambos servidores, abra um terminal paralelo ao dos passo anterior e navegue para a mesma pasta no repositório anteriormente clonado. Naturalmente, é necessário que a máquina já dispunha de ambos `npm` e Node.js` instalados.
+```
+git clone https://github.com/ES2-2021-1/IMAPI
+cd IMAPI/front-end
+```
+Instale as dependências da aplicação.
+```
+npm ci
+```
+Agora sua aplicação também está pronta para ir ao ar! Para fins de desenvolvimento, inicialize-a com:
+```
+npm run serve
+```
+Isto garantirá o recarregamento constante das páginas para melhor verificação de alterações e mensagens de erro em tempo de compilação. Alternativamente, para rodar um servidor aberto ao público, execute:
+```
+npm run build
+```
+
 ## Documentação
 Arquivos relevantes para o desenvolvimento da ferramenta como referências e diagramas, bem como seus respectivos arquivos de edição, podem ser encontrados na pasta `Documentação`.
 
 ### Ferramentas e versões
 Algumas ferramentas utilizadas internamente para facilitar o desenvolvimento do software e suas respectivas versões:
-- [Bootstrap Studio](https://bootstrapstudio.io/) (v5.8.1): prototipação das telas. O arquivo de edição .bsdesign se encontra na pasta `Documentação/Front end/Prototipação das telas`.
+- [Bootstrap Studio](https://bootstrapstudio.io/) (v5.8.1): prototipação das telas. O arquivo de edição .bsdesign se encontra na pasta `Documentação/Front end/Prototipação das telas(Bootstrap Studio)`.
 - [BrModelo](http://www.sis4.com/brModelo/) (v3.0): modelagem do banco de dados. O arquivo de edição .brM3 se encontra na pasta `Documentação/Modelagem do banco de dados`.
 - [draw.io](https://app.diagrams.net/): diagramas UML. Os arquivos de edição .drawio se encontram em `Documentação`, em suas respectivas pastas.
 - [Vue Devtools](https://github.com/vuejs/devtools#vue-devtools) (v3.0): para facilitar a inspeção de elementos HTML no navegador.
