@@ -20,7 +20,7 @@
 
     <body style="background-image: radial-gradient(#39b72e 2px, transparent 2px);background-size: 27px 27px;background-color: #9be268;">
         <Header/>
-        <Index/>
+        <Home/>
         <Footer/>
 
     </body>

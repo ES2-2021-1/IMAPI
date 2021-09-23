@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-5">
         <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: var(--bs-success);width: 100%;">Filtrar</button>
             <div class="dropdown-menu"><a class="dropdown-item" href="#">Análise</a><a class="dropdown-item" href="#">Em progresso</a><a class="dropdown-item" href="#">Rejeitadas</a></div>
         </div>
