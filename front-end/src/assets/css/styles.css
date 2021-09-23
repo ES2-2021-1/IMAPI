@@ -7,11 +7,19 @@ a:hover {
   color: #39b72e;
 }
 
-.btn-check:active + .btn-primary:focus, .btn-check:checked + .btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 .25rem rgba(20,255,0,0.5);
+.btn-check:active + .btn-primary:focus,
+.btn-check:checked + .btn-primary:focus,
+.btn-primary.active:focus,
+.btn-primary:active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgba(20, 255, 0, 0.5);
 }
 
-.btn-check:active + .btn-primary, .btn-check:checked + .btn-primary, .btn-primary.active, .btn-primary:active, .show > .btn-primary.dropdown-toggle {
+.btn-check:active + .btn-primary,
+.btn-check:checked + .btn-primary,
+.btn-primary.active,
+.btn-primary:active,
+.show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: var(--bs-green);
   border-color: var(--bs-green);
@@ -23,11 +31,12 @@ a:hover {
   border-color: var(--bs-green);
 }
 
-.btn-check:focus + .btn-primary, .btn-primary:focus {
+.btn-check:focus + .btn-primary,
+.btn-primary:focus {
   color: #fff;
   background-color: #39b72e;
   border-color: #39b72e;
-  box-shadow: 0 0 0 .25rem rgb(57,183,46);
+  box-shadow: 0 0 0 0.25rem rgb(57, 183, 46);
 }
 
 .card {
@@ -63,9 +72,9 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: #9BE268;
+  background: #9be268;
   border-radius: 0px;
-  box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+  box-shadow: inset 0px 0px 0px 0px #f0f0f0;
 }
 
 .dropdown {
@@ -97,13 +106,15 @@ input {
   border: 0;
   border-radius: 0;
   overflow-anchor: none;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,border-radius .15s ease;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    border-radius 0.15s ease;
 }
 
 .accordion-button:not(.collapsed) {
   color: #ffffff;
   background-color: #1a1a1a;
-  box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
 }
 
 .accordion-body {
@@ -122,15 +133,15 @@ input {
 .form-control:focus {
   color: #ffff;
   background-color: #2a2a2a;
-  border-color: rgba(0,0,0,0.125);
+  border-color: rgba(0, 0, 0, 0.125);
   outline: 0;
-  box-shadow: 0 0 0 0 rgb(0,0,0);
+  box-shadow: 0 0 0 0 rgb(0, 0, 0);
 }
 
 .form-control {
   display: block;
   width: 100%;
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -142,25 +153,7 @@ input {
   -moz-appearance: none;
   appearance: none;
   border-radius: 0;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-.form-login {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
-@media (max-width: 500px) {
-  .form-login {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: calc(110% + 150px);
-    width: 100%;
-  }
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 form {
@@ -199,4 +192,3 @@ form {
 .dropdown-menu.show {
   display: flex;
 }
-
