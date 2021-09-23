@@ -6,8 +6,17 @@ Vue.config.productionTip = false
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import VueMask from 'v-mask';
+
+Vue.use(VueAxios, axios);
 
 Vue.use(BootstrapVue);
+
+Vue.use(VueMask);
+
+window.axios = Vue.axios;
 
 new Vue({
   render: h => h(App),
