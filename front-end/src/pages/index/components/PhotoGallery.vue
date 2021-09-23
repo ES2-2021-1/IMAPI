@@ -15,8 +15,6 @@
     </section>
 </template>
 
-<script src="js/baguetteBox.min.js" async></script>
-
 <script>
 
 export default {
@@ -43,6 +41,7 @@ export default {
 </script>
 
 <style src='@/assets/css/baguetteBox.min.css'></style>
+<style src='@/assets/css/Lightbox-Gallery.css'></style>
 
 <style>
 
