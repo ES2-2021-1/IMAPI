@@ -18,8 +18,8 @@ export default {
     props:{
         img: String,
         title: String,
-        description: Text,
-        status: String,
+        description: String,
+        status: Number,
     }
 }
 </script>

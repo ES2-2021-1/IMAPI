@@ -4,8 +4,8 @@
             <div class="intro">
                 <h2 class="text-center">Alguns de nossos cases</h2>
             </div>
-            <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-3 photos" data-bss-baguettebox="">
-                <div class="col-sm-6 col-md-4 col-lg-3 item" v-for="inneCase in inneCases" v-bind:key="inneCase.imageUrl">
+            <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-3 photos mb-5" data-bss-baguettebox="">
+                <div class="col-sm-6 col-md-4 col-lg-3 my-3 item" v-for="inneCase in inneCases" v-bind:key="inneCase.imageUrl">
                     <a v-bind:href="require(`@/assets/img/` + inneCase.imageUrl)">
                         <img class="img-fluid" v-bind:src="require(`@/assets/img/` + inneCase.imageUrl)">
                     </a>
