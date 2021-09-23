@@ -18,12 +18,12 @@
         <link rel="stylesheet" :href="require('@/assets/css/Testimonials.css')">
     </head>
 
-    <body style="background-image: radial-gradient(#39b72e 2px, transparent 2px);background-size: 27px 27px;background-color: #9be268;">
+    <!-- <body style="background-image: radial-gradient(#39b72e 2px, transparent 2px);background-size: 27px 27px;background-color: #9be268;"> -->
         <Header/>
         <router-view></router-view>
         <Footer/>
 
-    </body>
+    <!-- </body> -->
 
     </html>
 </template>

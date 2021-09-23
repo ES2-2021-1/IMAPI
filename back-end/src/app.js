@@ -6,10 +6,10 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(cors());
 
 dotenv.config();
 
-app.use(cors());
 app.use("/api", routes);
 
 module.exports = app;

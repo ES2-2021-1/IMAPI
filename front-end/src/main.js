@@ -8,15 +8,20 @@ import VueRouter from 'vue-router';
 
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import  router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import VueMask from 'v-mask';
+import  router from './router';
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
+
 Vue.use(BootstrapVue);
 Vue.use(VueRouter)
 
-window.axios =  Vue.axios.create({baseURL: 'http://localhost:8082/'});
+window.axios = Vue.axios.create({ baseURL: 'http://localhost:8082/' });
+window.router = VueRouter;
+
+Vue.use(VueMask);
 
 new Vue({
   render: h => h(App),
