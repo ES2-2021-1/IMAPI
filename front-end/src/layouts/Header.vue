@@ -25,7 +25,16 @@
 </template>
 
 <script>
+
+
+
 export default {
   name: 'Header',
+  data: 
+      function() {
+        return   {
+            url: 'index.html'
+        }
+  }
 }
 </script>
