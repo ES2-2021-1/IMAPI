@@ -14,6 +14,7 @@
         <link rel="stylesheet" :href="require('@/assets/css/Features-Boxed.css')">
         <link rel="stylesheet" :href="require('@/assets/css/Login-Form-Dark.css')">
         <link rel="stylesheet" :href="require('@/assets/css/styles.css')">
+        <link rel="stylesheet" :href="require('@/assets/css/Footer-Basic.css')">
         <link rel="stylesheet" :href="require('@/assets/css/Testimonials.css')">
     </head>
 
