@@ -14,7 +14,9 @@
     "core-js": "^3.6.5",
     "v-mask": "^2.2.4",
     "vue": "^2.6.11",
-    "vue-axios": "^3.3.7"
+    "vue-axios": "^3.3.7",
+    "baguettebox.js": "^1.11.1",
+    "vue-router": "^3.5.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

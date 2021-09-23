@@ -57,6 +57,8 @@ Algumas ferramentas utilizadas internamente para facilitar o desenvolvimento do 
 - [BrModelo](http://www.sis4.com/brModelo/) (v3.0): modelagem do banco de dados. O arquivo de edição .brM3 se encontra na pasta `Documentação/Modelagem do banco de dados`.
 - [draw.io](https://app.diagrams.net/): diagramas UML. Os arquivos de edição .drawio se encontram em `Documentação`, em suas respectivas pastas.
 - [Vue Devtools](https://github.com/vuejs/devtools#vue-devtools) (v3.0): para facilitar a inspeção de elementos HTML no navegador.
+- [API Blueprint](https://apiblueprint.org/) (format 1A9): "Extensão" do markdown focado em documentação. Utilizamos na documentação das rotas.
+- [aglio](https://github.com/danielgtaylor/aglio) (v2.3.0): Renderer do API Blueprint.
 
 ### Documentação das rotas
 A documentação das rotas pode ser encontrada [neste link](https://es2-2021-1.github.io/IM_API/).

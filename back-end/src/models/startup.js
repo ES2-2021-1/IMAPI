@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       Startup.hasOne(models.Step, {
         as: 'currentStep',
-        foreignKey: 'currentStepId'
+        foreignKey: 'id'
       });
     }
   };
