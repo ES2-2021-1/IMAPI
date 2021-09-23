@@ -1,0 +1,456 @@
+FORMAT: A1
+
+# IM API
+
+Descrição das rotas que fazem interface com o banco de dados.
+
+# Group Annexes
+
+Recursos relacionados ao Annex na API.
+
+**Obs**: o campo `type` especifica o contexto do anexo. `type = 0` implica em um anexo de etapa, `type = 1` implica em um anexo de tarefa e `type = 2` implica em um anexo atrelado à entrega de uma tarefa.
+
+## Annex collection [/api/annex/]
+
+### Retornar um Annex [GET /api/annex/{id}]
+
+Retorna as informações de um anexo em específico.
+
+
++ Parameters
+    + id : 1 (integer)
+        Id do anexo.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            {
+                "id" : 2,
+                "path" : "arquivos/pastaTal",
+                "type" : 0,
+                "submissionId" : null,
+                "taskId" : null,
+                "stepId" : 3,
+                "createdAt" : "2021-09-20T20:21:09.535Z",
+                "updatedAt" : "2021-09-20T20:21:09.535Z"
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 1,
+                "maxItems" : 1,
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "path" : {
+                            "type" : "string"
+                        },
+                        "type" : {
+                            "enum" : [ 0, 1, 2 ]
+                        },
+                        "submissionId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "taskId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "stepId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            "Annex not found."
+
+### Retornar todos os Annexes [GET /api/annex]
+
+Retorna as informações de todos os anexos, em ordem crescente de acordo com a data da criação.
+        
++ Response 200 (application/json)
+
+    - Body
+
+            [
+                {
+                    "id" : 2,
+                    "path" : "arquivos/pastaTal",
+                    "type" : 0,
+                    "submissionId" : null,
+                    "taskId" : null,
+                    "stepId" : 3,
+                    "createdAt" : "2021-09-20T20:21:09.535Z",
+                    "updatedAt" : "2021-09-20T20:21:09.535Z"
+                },
+                {
+                    "id" : 4,
+                    "path" : "arquivos/pastaTal",
+                    "type" : 1,
+                    "submissionId" : null,
+                    "taskId" : 2,
+                    "stepId" : null,
+                    "createdAt" : "2021-09-20T20:21:09.535Z",
+                    "updatedAt" : "2021-09-20T20:21:09.535Z"
+                },
+                {
+                    "id" : 6,
+                    "path" : "arquivos/pastaTal",
+                    "type" : 0,
+                    "submissionId" : 8,
+                    "taskId" : null,
+                    "stepId" : null,
+                    "createdAt" : "2021-09-20T20:21:09.535Z",
+                    "updatedAt" : "2021-09-20T20:21:09.535Z"
+                }
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "path" : {
+                            "type" : "string"
+                        },
+                        "type" : {
+                            "enum" : [ 0, 1, 2 ]
+                        },
+                        "submissionId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "taskId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "stepId" : {
+                            "type" : ["integer", "null"]
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        }
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            [
+            ]
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "array",
+                "minItems" : 0,
+                "maxItems" : 0
+            }
+
+### Criar um Annex [POST]
+
+Cria um novo anexo.
+
++ Request (application/json)
+
+    Uma explicação mais intuitiva alternativa ao Schema é:
+    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `stepId`, e os campos `taskId` e `submissionId` são, então, dispensáveis
+    - se um Annex possui `type = 1`, então obrigatoriamente ele precisa ter um campo `taskId`, e os campos `stepId` e `submissionId` são, então, dispensáveis
+    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
+
+    - Body
+
+            {
+                "path" : "arquivos/pastaTal",
+                "type" : 0,
+                "stepId" : 3
+            }
+    
+    - Schema
+        
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["path", "type"],
+                "properties" : {
+                    "path" : {
+                        "type" : "string"
+                    },
+                    "type" : {
+                        "enum" : [ 0, 1, 2 ]
+                    },
+                    "stepId" : {
+                        "type" : "integer"
+                    },
+                    "taskId" : {
+                        "type" : "integer"
+                    },
+                    "submissionId" : {
+                        "type" : "integer"
+                    }
+                },
+                "anyOf" : [
+                    {
+                        "properties" : {
+                            "type" : {
+                                "const" : 0
+                            }
+                        },
+                        "required" : ["stepId"]
+                    },
+                    {
+                        "properties" : {
+                            "type" : {
+                                "const" : 1
+                            }
+                        },
+                        "required" : ["taskId"]
+                    },
+                    {
+                        "properties" : {
+                            "type" : {
+                                "const" : 2
+                            }
+                        },
+                        "required" : ["submissionId"]
+                    }
+                ]
+            }
+        
++ Response 201 (application/json)
+
+    - Body
+    
+            {
+                "id" : 1,
+                "path" : "arquivos/pastaTal",
+                "type" : 2,
+                "submissionId" : 1,
+                "taskId" : null,
+                "stepId" : null,
+                "updatedAt" : "2021-09-20T18:50:53.663Z",
+                "createdAt" : "2021-09-20T18:50:53.663Z"
+            }
+        
+    - Schema
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "properties" : {
+                    "id" : {
+                        "type" : "integer"
+                    },
+                    "path" : {
+                        "type" : "string"
+                    },
+                    "type" : {
+                        "enum" : [ 0, 1, 2 ]
+                    },
+                    "submissionId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "taskId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "stepId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "updatedAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                    },
+                    "createdAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                    }
+                }
+            }
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "type" : [
+                        "Type field not provided."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Editar um Annex [PATCH /api/annex/{id}]
+
+Edita os dados de um anexo já existente.
+
++ Parameters
+    + id : 1 (integer)
+        Id do anexo.
+        
++ Request (application/json)
+
+    Uma explicação mais intuitiva alternativa ao Schema é:
+    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `stepId`, e os campos `taskId` e `submissionId` são, então, dispensáveis
+    - se um Annex possui `type = 1`, então obrigatoriamente ele precisa ter um campo `taskId`, e os campos `stepId` e `submissionId` são, então, dispensáveis
+    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
+    
+    - Body
+    
+            {
+                "path" : "arquivos/pastaTal",
+                "submissionId" : 3
+            }
+    
+    - Schema
+        
+    
+            {
+                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "type" : "object",
+                "required" : ["path"],
+                "properties" : {
+                    "path" : {
+                        "type" : "string"
+                    },
+                    "type" : {
+                        "enum" : [ 0, 1, 2 ]
+                    },
+                    "submissionId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "taskId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "stepId" : {
+                        "type" : ["integer", "null"]
+                    },
+                    "updatedAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                    },
+                    "createdAt" : {
+                        "type" : "string",
+                        "pattern" :
+                            "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                    }
+                }
+            }
+        
++ Response 200 (application/json)
+
+    - Body
+    
+            "Update performed successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+            
+            {
+                "errors" : {
+                    "path" : [
+                        "The path field is required."
+                    ]
+                }
+            }
+        
+    - Schema
+    
+            {
+             	"type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                    "errors" : {
+                        "type" : "object",
+                        "additionalProperties" : {
+                            "type" : "array",
+                            "minItems" : 1,
+                            "items" : {
+                                "type" : "string",
+                                "minItems" : 1
+                            }
+                        }
+                    }
+                }
+            }
+
+### Remover um Annex [DELETE /api/annex/{id}]
+
+Remove permanentemente uma anexo.
+
++ Parameters
+    + id : 1 (integer)
+        Id do anexo.
+        
+
++ Response 200 (application/json)
+
+    - Body
+    
+            "Deleted successfully"
+        
++ Response 400 (application/json)
+
+    - Body
+    
+            "Not deleted"
+        
