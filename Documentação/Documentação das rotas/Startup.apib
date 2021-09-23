@@ -18,6 +18,13 @@ Retorna as informações de uma startup em específico.
     + id : 1 (integer)
         Id da startup.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
@@ -40,7 +47,7 @@ Retorna as informações de uma startup em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -104,7 +111,7 @@ Retorna as informações de uma startup em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -120,6 +127,13 @@ Retorna as informações de uma startup em específico.
 
 Retorna as informações de todos os startups, em ordem crescente de acordo com a data da criação.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
@@ -160,7 +174,7 @@ Retorna as informações de todos os startups, em ordem crescente de acordo com 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "items" : {
                     "type" : "object",
@@ -216,7 +230,7 @@ Retorna as informações de todos os startups, em ordem crescente de acordo com 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -232,7 +246,12 @@ Retorna as informações de todos os startups, em ordem crescente de acordo com 
 
 Cria uma nova startup.
 
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
     
@@ -249,7 +268,7 @@ Cria uma nova startup.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "required" : ["name", "description", "state", 
                               "ownerId"],
@@ -303,7 +322,7 @@ Cria uma nova startup.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "properties" : {
                     "name" : {
@@ -386,7 +405,12 @@ Edita os dados de uma startup já existente.
         Id da startup.
         
 
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
     
@@ -403,7 +427,7 @@ Edita os dados de uma startup já existente.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -488,6 +512,13 @@ Remove permanentemente uma startup.
     + id : 1 (integer)
         Id do startup.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body

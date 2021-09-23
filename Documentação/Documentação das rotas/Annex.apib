@@ -21,6 +21,13 @@ Retorna as informações de um anexo em específico.
     + id : 1 (integer)
         Id do anexo.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
@@ -39,7 +46,7 @@ Retorna as informações de um anexo em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "minItems" : 1,
                 "maxItems" : 1,
@@ -89,6 +96,13 @@ Retorna as informações de um anexo em específico.
 
 Retorna as informações de todos os anexos, em ordem crescente de acordo com a data da criação.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
@@ -129,7 +143,7 @@ Retorna as informações de todos os anexos, em ordem crescente de acordo com a 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "items" : {
                     "type" : "object",
@@ -177,7 +191,7 @@ Retorna as informações de todos os anexos, em ordem crescente de acordo com a 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "minItems" : 0,
                 "maxItems" : 0
@@ -187,12 +201,17 @@ Retorna as informações de todos os anexos, em ordem crescente de acordo com a 
 
 Cria um novo anexo.
 
-+ Request (application/json)
++ Request
 
     Uma explicação mais intuitiva alternativa ao Schema é:
     - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `stepId`, e os campos `taskId` e `submissionId` são, então, dispensáveis
     - se um Annex possui `type = 1`, então obrigatoriamente ele precisa ter um campo `taskId`, e os campos `stepId` e `submissionId` são, então, dispensáveis
     - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
 
@@ -205,7 +224,7 @@ Cria um novo anexo.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "required" : ["path", "type"],
                 "properties" : {
@@ -271,7 +290,7 @@ Cria um novo anexo.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "properties" : {
                     "id" : {
@@ -345,12 +364,17 @@ Edita os dados de um anexo já existente.
     + id : 1 (integer)
         Id do anexo.
         
-+ Request (application/json)
++ Request
 
     Uma explicação mais intuitiva alternativa ao Schema é:
     - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `stepId`, e os campos `taskId` e `submissionId` são, então, dispensáveis
     - se um Annex possui `type = 1`, então obrigatoriamente ele precisa ter um campo `taskId`, e os campos `stepId` e `submissionId` são, então, dispensáveis
     - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
     
     - Body
     
@@ -363,7 +387,7 @@ Edita os dados de um anexo já existente.
         
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "required" : ["path"],
                 "properties" : {
@@ -441,6 +465,13 @@ Remove permanentemente uma anexo.
     + id : 1 (integer)
         Id do anexo.
         
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
 
 + Response 200 (application/json)
 

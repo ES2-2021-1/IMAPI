@@ -20,6 +20,12 @@ Retorna as informações de um usuário em específico.
     + id : 1 (integer)
         Id do usuário.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+        
 + Response 200 (application/json)
 
     - Body
@@ -42,7 +48,7 @@ Retorna as informações de um usuário em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -104,7 +110,7 @@ Retorna as informações de um usuário em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -119,7 +125,13 @@ Retorna as informações de um usuário em específico.
 ### Retornar todos os User [GET /api/user]
 
 Retorna as informações de todos os usuários, em ordem crescente de acordo com a data da criação.
-        
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
 + Response 200 (application/json)
 
     - Body
@@ -160,7 +172,7 @@ Retorna as informações de todos os usuários, em ordem crescente de acordo com
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "items" : {
                     "type" : "object",
@@ -214,7 +226,7 @@ Retorna as informações de todos os usuários, em ordem crescente de acordo com
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -231,9 +243,7 @@ Retorna as informações de todos os usuários, em ordem crescente de acordo com
 Cria um novo usuário.
 
 + Request (application/json)
-
     
-
     - Body
     
             {
@@ -249,7 +259,7 @@ Cria um novo usuário.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "required" : ["name", "email", "password", 
                               "password_confirmation", "role"],
@@ -306,7 +316,7 @@ Cria um novo usuário.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "properties" : {
                     "id" : {
@@ -396,7 +406,12 @@ Edita os dados de um usuário já existente.
         Id do usuário.
         
 
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
     
@@ -410,7 +425,7 @@ Edita os dados de um usuário já existente.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -499,6 +514,13 @@ Remove permanentemente um usuário.
     + id : 1 (integer)
         Id do usuário.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
