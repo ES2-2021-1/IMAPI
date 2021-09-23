@@ -61,7 +61,7 @@ export default {
 
 			let newCpf = this.cpf.replaceAll(".", "");
 			newCpf = newCpf.replaceAll("-", "");
-			console.log(newCpf);
+
 
 			const bodyParameters = {
 				name: this.name,
@@ -74,12 +74,11 @@ export default {
 			};
 
 			window.axios.post( 
-				'http://localhost:8082/api/user',
+				'http://localhost:7272/api/user',
 				bodyParameters
 				).then( res=> {
 					console.log(res)
 				}).catch( err => {
-					console.log("Erro: "+ JSON.stringify(err.response.data))
 					if(err.response.data.errors.name){
 						this.nameError = err.response.data.errors.name[0];
 					}
