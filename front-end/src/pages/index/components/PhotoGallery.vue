@@ -41,6 +41,7 @@ export default {
 </script>
 
 <style src='@/assets/css/baguetteBox.min.css'></style>
+<style src='@/assets/css/Lightbox-Gallery.css'></style>
 
 <style>
 
