@@ -644,67 +644,67 @@
 <h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/module/<span class="hljs-attribute" title="id">1</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>integer</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>1</span></span><p>Id do módulo.</p>
 </dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer &lt;access token&gt;</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code><span class="hljs-string">"Deleted successfully"</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code><span class="hljs-string">"Not deleted"</span></code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="startups" class="resource-group"><h2 class="group-heading">Startups <a href="#startups" class="permalink">&para;</a></h2><p>Recursos relacionados ao Startup na API.</p>
 <div id="startups-startup-collection" class="resource"><h3 class="resource-heading">Startup collection <a href="#startups-startup-collection" class="permalink">&nbsp;&para;</a></h3><div id="startups-startup-collection-get" class="action get"><h4 class="action-heading"><div class="name">Retornar um Startup</div><a href="#startups-startup-collection-get" class="method get">GET</a><code class="uri">/api/startup/{id}</code></h4><p>Retorna as informações de uma startup em específico.</p>
+<p><strong>Obs</strong>: o campo <code>state</code> especifica o estado atual da startup em relação a sua aprovação. <code>state = true</code> implica em uma startup aprovada e <code>state = false</code> implica em uma startup recusada ou não-avaliada.</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/startup/<span class="hljs-attribute" title="id">1</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>integer</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>1</span></span><p>Id da startup.</p>
-</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer &lt;access token&gt;</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">response</span>": <span class="hljs-value">[
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"João da Silva"</span></span>,
-      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"joao@mail.com"</span></span>,
-      "<span class="hljs-attribute">phone</span>": <span class="hljs-value"><span class="hljs-string">"(12)3456-7890"</span></span>,
-      "<span class="hljs-attribute">cpf</span>": <span class="hljs-value"><span class="hljs-string">"01234567891"</span></span>,
-      "<span class="hljs-attribute">role</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
-      "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value"><span class="hljs-string">"2021-09-09T20:29:03.625Z"</span></span>,
-      "<span class="hljs-attribute">createdAt</span>": <span class="hljs-value"><span class="hljs-string">"2021-09-09T20:29:03.625Z"</span>
-    </span>}
-  ]
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer &lt;access token&gt;</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Startup Bacana"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</span></span>,
+    "<span class="hljs-attribute">state</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">pitchLink</span>": <span class="hljs-value"><span class="hljs-string">"youtu.be/p1TcHLinK"</span></span>,
+    "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">mentorId</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">currentStepId</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">createdAt</span>": <span class="hljs-value"><span class="hljs-string">"2021-09-21T02:40:42.231Z"</span></span>,
+    "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value"><span class="hljs-string">"2021-09-21T02:40:42.231Z"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
   "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-07/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">additionalProperties</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">response</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-      "<span class="hljs-attribute">minItems</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-      "<span class="hljs-attribute">maxItems</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-      "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-        "<span class="hljs-attribute">additionalProperties</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-        "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span>
-          </span>}</span>,
-          "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">minLength</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-            "<span class="hljs-attribute">maxLength</span>": <span class="hljs-value"><span class="hljs-number">255</span>
-          </span>}</span>,
-          "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">format</span>": <span class="hljs-value"><span class="hljs-string">"email"</span>
-          </span>}</span>,
-          "<span class="hljs-attribute">phone</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">pattern</span>": <span class="hljs-value"><span class="hljs-string">"\\([0-9]{2}\\)[0-9]{4,5}\\-[0-9]{4}"</span>
-          </span>}</span>,
-          "<span class="hljs-attribute">cpf</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">pattern</span>": <span class="hljs-value"><span class="hljs-string">"[0-9]{11}"</span>
-          </span>}</span>,
-          "<span class="hljs-attribute">role</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span></span>,
-            "<span class="hljs-attribute">minimum</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
-            "<span class="hljs-attribute">maximum</span>": <span class="hljs-value"><span class="hljs-number">1</span>
-          </span>}</span>,
-          "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">pattern</span>": <span class="hljs-value"><span class="hljs-string">"[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"</span>
-          </span>}</span>,
-          "<span class="hljs-attribute">createdAt</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">pattern</span>": <span class="hljs-value"><span class="hljs-string">"[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"</span>
-          </span>}
-        </span>}
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
+  "<span class="hljs-attribute">minItems</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">maxItems</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+    "<span class="hljs-attribute">additionalProperties</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+    "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+        "<span class="hljs-attribute">minLength</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
+        "<span class="hljs-attribute">maxLength</span>": <span class="hljs-value"><span class="hljs-number">255</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+        "<span class="hljs-attribute">minLength</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+        "<span class="hljs-attribute">maxLength</span>": <span class="hljs-value"><span class="hljs-number">255</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">state</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">pitchLink</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+        "<span class="hljs-attribute">minLength</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
+        "<span class="hljs-attribute">maxLength</span>": <span class="hljs-value"><span class="hljs-number">30</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">mentorId</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">currentStepId</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+        "<span class="hljs-attribute">pattern</span>": <span class="hljs-value"><span class="hljs-string">"[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">createdAt</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+        "<span class="hljs-attribute">pattern</span>": <span class="hljs-value"><span class="hljs-string">"[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"</span>
       </span>}
     </span>}
   </span>}
@@ -767,22 +767,27 @@
         "<span class="hljs-attribute">minLength</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
         "<span class="hljs-attribute">maxLength</span>": <span class="hljs-value"><span class="hljs-number">255</span>
       </span>}</span>,
-      "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-        "<span class="hljs-attribute">format</span>": <span class="hljs-value"><span class="hljs-string">"email"</span>
+        "<span class="hljs-attribute">minLength</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+        "<span class="hljs-attribute">maxLength</span>": <span class="hljs-value"><span class="hljs-number">255</span>
       </span>}</span>,
-      "<span class="hljs-attribute">phone</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">state</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">pitchLink</span>": <span class="hljs-value">{
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-        "<span class="hljs-attribute">pattern</span>": <span class="hljs-value"><span class="hljs-string">"\\([0-9]{2}\\)[0-9]{4,5}\\-[0-9]{4}"</span>
+        "<span class="hljs-attribute">minLength</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
+        "<span class="hljs-attribute">maxLength</span>": <span class="hljs-value"><span class="hljs-number">30</span>
       </span>}</span>,
-      "<span class="hljs-attribute">cpf</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-        "<span class="hljs-attribute">pattern</span>": <span class="hljs-value"><span class="hljs-string">"[0-9]{11}"</span>
+      "<span class="hljs-attribute">mentorId</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span>
       </span>}</span>,
-      "<span class="hljs-attribute">role</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span></span>,
-        "<span class="hljs-attribute">minimum</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
-        "<span class="hljs-attribute">maximum</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+      "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">currentStepId</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span>
       </span>}</span>,
       "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value">{
         "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
