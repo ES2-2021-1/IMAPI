@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const AuthMiddleware = require('../middlewares/AuthMiddleware');
 const UserRoutes = require('./UserRoutes');
 const StartupRoutes = require('./StartupRoutes');
 const SubmissionRoutes = require('./SubmissionRoutes');
@@ -11,14 +12,14 @@ const StepRoutes = require('./StepRoutes');
 const ModuleRoutes = require('./ModuleRoutes');
 const UploadRoutes = require('./UploadRoutes');
 
-router.use('/user', UserRoutes);
-router.use('/startup', StartupRoutes);
-router.use('/annex', AnnexRoutes);
-router.use('/task', TaskRoutes);
 router.use('/auth', AuthRoutes);
-router.use('/submission', SubmissionRoutes);
-router.use('/step', StepRoutes);
-router.use('/module', ModuleRoutes);
-router.use('/upload', UploadRoutes);
+router.use('/user', UserRoutes);
+router.use('/startup', AuthMiddleware.auth, StartupRoutes);
+router.use('/annex', AuthMiddleware.auth, AnnexRoutes);
+router.use('/task', AuthMiddleware.auth, TaskRoutes);
+router.use('/submission', AuthMiddleware.auth, SubmissionRoutes);
+router.use('/step', AuthMiddleware.auth, StepRoutes);
+router.use('/module', AuthMiddleware.auth, ModuleRoutes);
+router.use('/upload', AuthMiddleware.auth, UploadRoutes);
 
 module.exports = router;

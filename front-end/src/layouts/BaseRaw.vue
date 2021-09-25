@@ -30,6 +30,7 @@
               </div>
           </div>
       </nav>
+
       <Register/>
       <Footer/>
 
@@ -50,7 +51,7 @@ import Login from "../pages/login/Login.vue";
 import Register from "../pages/register/Register.vue";
 
 export default {
-  name: 'Base',
+  name: 'BaseRaw',
   components: {
     Footer,
     Header,
