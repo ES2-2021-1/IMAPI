@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import Step from "./Step.vue";
 import Task from "./Task.vue";
 
 export default {
@@ -28,7 +27,7 @@ export default {
         Task
 	},
     props: {
-        step : Step
+        step: null,
     },
     data() {
         return {
@@ -37,7 +36,7 @@ export default {
     },
     methods: {
         async fetchTask() {
-            let { data } = await window.axios.get(`http://localhost:8082/api/task/`);
+            let { data } = await window.axios.get(`/api/task/`, {headers: { Authorization: `Bearer ${this.$session.get("token")}`}});
             for(let task in data){
                 if(data[task].stepId == this.step.id){
                     this.task = data[task];

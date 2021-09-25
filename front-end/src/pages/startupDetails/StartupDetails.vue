@@ -12,7 +12,7 @@
             <div class="col-md-8">
                 <b-progress :value="startup.currentStepId" :max="nSteps" height="10px" animated variant="success"></b-progress>
                 <div class="accordion" role="tablist" id="accordion-1">
-                    <Module v-for="module in modules" :key="module.id" :module="module" :steps="steps"/>
+                    <Module v-for="module in modules" :key="module.id" :module="module" :steps="steps[module.id]"/>
                 </div>
             </div>
         </b-row>
@@ -30,36 +30,40 @@ export default {
     data() {
         return {
             modules: [],
-            startup: [],
-            steps: [],
+            startup: "",
+            steps: {},
             id: 2,
             nSteps: 0,
         }
     },
     methods: {
         async fetchModules() {
-            let { data } = await window.axios.get(`http://localhost:8082/api/module/`);
+            let { data } = await window.axios.get(`/api/module/`, {headers: { Authorization: `Bearer ${this.$session.get("token")}`}});
             this.modules = data;
         },
         async fetchStartup() {
-            let { data } = await window.axios.get(`http://localhost:8082/api/startup/`+this.id);
+            let { data } = await window.axios.get(`/api/startup/`+this.id, {headers: { Authorization: `Bearer ${this.$session.get("token")}`}});
             this.startup = data[0];
         },
         async fetchSteps() {
-            let { data } = await window.axios.get(`http://localhost:8082/api/step/`);
-            this.steps = data;
+            let { data } = await window.axios.get(`/api/step/`, {headers: { Authorization: `Bearer ${this.$session.get("token")}`}});
             this.nSteps = data.length;
+            for await(let step of data){
+                if(this.steps[step.moduleId]){
+                    this.steps[step.moduleId].push(step);
+                } else {
+                    this.steps[step.moduleId] = new Array();
+                    this.steps[step.moduleId].push(step);
+                }
+            }
         },
     },
     created() {
+        this.$session.set('token',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjMyNjAwMDcwLCJleHAiOjE2MzI2MDM2NzB9.-7p8tpC88WX0si28lYJ5iwjys_DOqTe3ugKy1sbOBWY");
         this.fetchSteps();
         this.fetchStartup();
         this.fetchModules();
     },
-    mounted() {
-        console.log(this.startup);
-        console.log(this.nSteps);
-    }
 }
 </script>
 
