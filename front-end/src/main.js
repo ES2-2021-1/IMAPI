@@ -5,6 +5,7 @@ Vue.config.productionTip = false
 
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import VueRouter from 'vue-router';
+import VueSession from 'vue-session'
 
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -17,6 +18,7 @@ Vue.use(VueAxios, axios);
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter)
+Vue.use(VueSession)
 
 window.axios = Vue.axios.create({ baseURL: 'http://localhost:8082/' });
 window.router = VueRouter;

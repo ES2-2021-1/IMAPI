@@ -1,7 +1,7 @@
 <template>
 	<div class="form-login">
 		<section class="login-dark">
-		<form @submit.prevent="login">
+		<form @submit.prevent="register">
 			<h2 class="visually-hidden">Login Form</h2>
 			<div class="illustration"><img :src="require('@/assets/img/Logo_TIPO BRANCO.png')" style="width: 100%;" required></div>
 
@@ -51,7 +51,7 @@ export default {
 			}
 	},
 	methods: {
-		async login() {
+		async register() {
 			this.nameError = '';
 			this.emailError = '';
 			this.cpfError = '';
