@@ -16,7 +16,7 @@ Faz o upload de um arquivo.
 
 + Request
 
-    Simplificando o processo de upload, é preciso que o form tenha um campo com `name="upload"`, de tipo `file`. Mais informações para a compreensão do `Body` podem ser obtidas [aqui](https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4).
+    Simplificando o protocolo de upload, é preciso que o form tenha um campo com `name="upload"`, de tipo `file`. Também é preciso que o atributo `enctype` do form tenha o valor `form-data`. Mais informações para a compreensão do `Body` podem ser obtidas [aqui](https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4).
 
     + Headers
 
@@ -44,7 +44,7 @@ Faz o upload de um arquivo.
     - Schema
 
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -79,7 +79,12 @@ Faz o upload de um arquivo.
 
 Remove permanentemente um arquivo.
 
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
 
@@ -90,7 +95,7 @@ Remove permanentemente um arquivo.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -111,7 +116,7 @@ Remove permanentemente um arquivo.
     - Schema
 
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {

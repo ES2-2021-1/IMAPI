@@ -1,6 +1,6 @@
 <template>
-	<div class="form-login">
-		<section class="login-dark">
+	<div class="form-login py-5 my-4">
+		<section class="login-dark d-flex justify-content-center login-dark">
 		<form @submit.prevent="register">
 			<h2 class="visually-hidden">Login Form</h2>
 			<div class="illustration"><img :src="require('@/assets/img/Logo_TIPO BRANCO.png')" style="width: 100%;" required></div>

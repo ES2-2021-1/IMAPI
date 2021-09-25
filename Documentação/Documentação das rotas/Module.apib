@@ -17,7 +17,14 @@ Retorna as informações de um módulo em específico.
 + Parameters
     + id : 1 (integer)
         Id do módulo.
-        
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
@@ -34,7 +41,7 @@ Retorna as informações de um módulo em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "minItems" : 1,
                 "maxItems" : 1,
@@ -74,7 +81,7 @@ Retorna as informações de um módulo em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "minItems" : 0,
                 "maxItems" : 0
@@ -84,6 +91,13 @@ Retorna as informações de um módulo em específico.
 
 Retorna as informações de todos os módulos, em ordem crescente de acordo com a data da criação.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
@@ -106,7 +120,7 @@ Retorna as informações de todos os módulos, em ordem crescente de acordo com 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "items" : {
                     "type" : "object",
@@ -144,7 +158,7 @@ Retorna as informações de todos os módulos, em ordem crescente de acordo com 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "minItems" : 0,
                 "maxItems" : 0
@@ -154,7 +168,12 @@ Retorna as informações de todos os módulos, em ordem crescente de acordo com 
 
 Cria um novo módulo.
 
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
     
@@ -165,7 +184,7 @@ Cria um novo módulo.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "required" : ["title"],
                 "properties" : {
@@ -193,7 +212,7 @@ Cria um novo módulo.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "minItems" : 1,
                 "maxItems" : 1,
@@ -263,7 +282,12 @@ Edita os dados de um módulo já existente.
     + id : 1 (integer)
         Id do módulo.
         
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
     
@@ -274,7 +298,7 @@ Edita os dados de um módulo já existente.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "required" : ["title"],
                 "properties" : {
@@ -332,6 +356,13 @@ Remove permanentemente uma módulo.
     + id : 1 (integer)
         Id do módulo.
         
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
 
 + Response 200 (application/json)
 

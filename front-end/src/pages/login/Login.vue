@@ -1,7 +1,7 @@
 <template>
-  <div class="form-login">
-        <section class="login-dark">
-            <form class="text-center" @submit.prevent="login">
+  <div class="py-5 my-4 form-login">
+        <section class="d-flex justify-content-center login-dark">
+            <form class="text-center mt-5 p-3" method="post" @submit.prevent="login">
                 <div class="illustration"><img :src="require('@/assets/img/Logo_TIPO BRANCO.png')" style="width: 100%;"></div>
 
                 <small class="text-danger">{{ invalidLogin }}</small>
@@ -70,5 +70,5 @@ export default {
 </script>
 
 <style>
-
+  
 </style>

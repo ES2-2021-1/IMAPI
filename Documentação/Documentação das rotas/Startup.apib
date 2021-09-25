@@ -14,80 +14,88 @@ Recursos relacionados ao Startup na API.
 
 Retorna as informações de uma startup em específico.
 
+**Obs**: o campo `state` especifica o estado atual da startup em relação a sua aprovação. `state = true` implica em uma startup aprovada e `state = false` implica em uma startup recusada ou não-avaliada.
+
 + Parameters
     + id : 1 (integer)
         Id da startup.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
 
-            {
-                "response": [
-                    {
-                        "id": 1,
-                        "name": "João da Silva",
-                        "email": "joao@mail.com",
-                        "phone": "(12)3456-7890",
-                        "cpf": "01234567891",
-                        "role": 0,
-                        "updatedAt" : "2021-09-09T20:29:03.625Z",
-                        "createdAt" : "2021-09-09T20:29:03.625Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "id": 1,
+                    "name": "Startup Bacana",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "state": true,
+                    "pitchLink": "youtu.be/p1TcHLinK",
+                    "ownerId": 1,
+                    "mentorId": 1,
+                    "currentStepId": 1,
+                    "createdAt": "2021-09-21T02:40:42.231Z",
+                    "updatedAt": "2021-09-21T02:40:42.231Z"
+                }
+            ]
         
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
-                "type" : "object",
-                "additionalProperties" : false,
-                "properties" : {
-                    "response" : {
-                        "type" : "array",
-                        "minItems" : 1,
-                        "maxItems" : 1,
-                        "items" : {
-                            "type" : "object",
-                            "additionalProperties" : false,
-                            "properties" : {
-                                "id" : {
-                                    "type" : "integer"
-                                },
-                                "name" : {
-                                    "type" : "string",
-                                    "minLength" : 3,
-                                    "maxLength" : 255
-                                },
-                                "email" : {
-                                    "type" : "string",
-                                    "format" : "email"
-                                },
-                                "phone" : {
-                                    "type" : "string",
-                                    "pattern" : "\\([0-9]{2}\\)[0-9]{4,5}\\-[0-9]{4}"
-                                },
-                                "cpf" : {
-                                    "type" : "string",
-                                    "pattern" : "[0-9]{11}" 
-                                },
-                                "role" : {
-                                    "type" : "integer",
-                                    "minimum" : 0,
-                                    "maximum" : 1
-                                },
-                                "updatedAt" : {
-                                    "type" : "string",
-                                    "pattern" :
-                                        "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
-                                },
-                                "createdAt" : {
-                                    "type" : "string",
-                                    "pattern" :
-                                        "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
-                                }
-                            }
+                "$schema" : "http://json-schema.org/draft-07/schema#",
+                "type" : "array",
+                "minItems" : 1,
+                "maxItems" : 1,
+                "items" : {
+                    "type" : "object",
+                    "additionalProperties" : false,
+                    "properties" : {
+                        "id" : {
+                            "type" : "integer"
+                        },
+                        "name" : {
+                            "type" : "string",
+                            "minLength" : 3,
+                            "maxLength" : 255
+                        },
+                        "description" : {
+                            "type" : "string",
+                            "minLength" : 10,
+                            "maxLength" : 255
+                        },
+                        "state" : {
+                            "type" : "boolean"
+                        },
+                        "pitchLink" : {
+                            "type" : "string",
+                            "minLength" : 6,
+                            "maxLength" : 30
+                        },
+                        "mentorId" : {
+                            "type" : "integer"
+                        },
+                        "ownerId" : {
+                            "type" : "integer"
+                        },
+                        "currentStepId" : {
+                            "type" : "integer"
+                        },
+                        "updatedAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
+                        },
+                        "createdAt" : {
+                            "type" : "string",
+                            "pattern" :
+                                "[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]+Z"
                         }
                     }
                 }
@@ -104,7 +112,7 @@ Retorna as informações de uma startup em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -120,6 +128,13 @@ Retorna as informações de uma startup em específico.
 
 Retorna as informações de todos os startups, em ordem crescente de acordo com a data da criação.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
@@ -160,7 +175,7 @@ Retorna as informações de todos os startups, em ordem crescente de acordo com 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "items" : {
                     "type" : "object",
@@ -174,22 +189,27 @@ Retorna as informações de todos os startups, em ordem crescente de acordo com 
                             "minLength" : 3,
                             "maxLength" : 255
                         },
-                        "email" : {
+                        "description" : {
                             "type" : "string",
-                            "format" : "email"
+                            "minLength" : 10,
+                            "maxLength" : 255
                         },
-                        "phone" : {
+                        "state" : {
+                            "type" : "boolean"
+                        },
+                        "pitchLink" : {
                             "type" : "string",
-                            "pattern" : "\\([0-9]{2}\\)[0-9]{4,5}\\-[0-9]{4}"
+                            "minLength" : 6,
+                            "maxLength" : 30
                         },
-                        "cpf" : {
-                            "type" : "string",
-                            "pattern" : "[0-9]{11}" 
+                        "mentorId" : {
+                            "type" : "integer"
                         },
-                        "role" : {
-                            "type" : "integer",
-                            "minimum" : 0,
-                            "maximum" : 1
+                        "ownerId" : {
+                            "type" : "integer"
+                        },
+                        "currentStepId" : {
+                            "type" : "integer"
                         },
                         "updatedAt" : {
                             "type" : "string",
@@ -216,7 +236,7 @@ Retorna as informações de todos os startups, em ordem crescente de acordo com 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -232,7 +252,12 @@ Retorna as informações de todos os startups, em ordem crescente de acordo com 
 
 Cria uma nova startup.
 
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
     
@@ -249,7 +274,7 @@ Cria uma nova startup.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "required" : ["name", "description", "state", 
                               "ownerId"],
@@ -303,7 +328,7 @@ Cria uma nova startup.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "properties" : {
                     "name" : {
@@ -386,7 +411,12 @@ Edita os dados de uma startup já existente.
         Id da startup.
         
 
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
     
@@ -403,7 +433,7 @@ Edita os dados de uma startup já existente.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -488,6 +518,13 @@ Remove permanentemente uma startup.
     + id : 1 (integer)
         Id do startup.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body

@@ -18,6 +18,13 @@ Retorna as informações de uma etapa em específico.
     + id : 1 (integer)
         Id da etapa.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
@@ -37,7 +44,7 @@ Retorna as informações de uma etapa em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "minItems" : 1,
                 "maxItems" : 1,
@@ -84,7 +91,7 @@ Retorna as informações de uma etapa em específico.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "minItems" : 0,
                 "maxItems" : 0
@@ -94,6 +101,13 @@ Retorna as informações de uma etapa em específico.
 
 Retorna as informações de todos as etapas, em ordem crescente de acordo com a data da criação.
         
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
+
 + Response 200 (application/json)
 
     - Body
@@ -122,7 +136,7 @@ Retorna as informações de todos as etapas, em ordem crescente de acordo com a 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "items" : {
                     "type" : "object",
@@ -167,7 +181,7 @@ Retorna as informações de todos as etapas, em ordem crescente de acordo com a 
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "array",
                 "minItems" : 0,
                 "maxItems" : 0
@@ -177,7 +191,12 @@ Retorna as informações de todos as etapas, em ordem crescente de acordo com a 
 
 Cria uma nova etapa.
 
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
     
@@ -191,7 +210,7 @@ Cria uma nova etapa.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "required" : ["moduleId", "title", "summary"],
                 "additionalProperties" : false,
@@ -235,7 +254,7 @@ Cria uma nova etapa.
     - Schema
     
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "additionalProperties" : false,
                 "properties" : {
@@ -313,7 +332,12 @@ Edita os dados de uma etapa já existente.
     + id : 1 (integer)
         Id da etapa.
         
-+ Request (application/json)
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+            Content-Type: application/json
 
     - Body
     
@@ -327,7 +351,7 @@ Edita os dados de uma etapa já existente.
     - Schema
         
             {
-                "$schema" : "http://json-schema.org/draft-04/schema#",
+                "$schema" : "http://json-schema.org/draft-07/schema#",
                 "type" : "object",
                 "required" : ["moduleId", "title", "summary"],
                 "additionalProperties" : false,
@@ -395,6 +419,13 @@ Remove permanentemente uma etapa.
     + id : 1 (integer)
         Id da etapa.
         
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer <access token>
+
 
 + Response 200 (application/json)
 
