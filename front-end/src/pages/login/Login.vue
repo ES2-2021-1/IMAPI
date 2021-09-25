@@ -47,8 +47,7 @@ export default {
 				'api/auth',
 				bodyParameters
 				).then((response)=> {
-          console.log(response.data.token)
-          // Precisa parte do session
+          this.$session.set("token", response.data.token);
 					this.$router.push({ name: 'home' })
 				}).catch( err => {
           console.log(err.response.data)
