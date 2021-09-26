@@ -59,7 +59,6 @@ export default {
         },
     },
     created() {
-        this.$session.set('token',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjMyNjAwMDcwLCJleHAiOjE2MzI2MDM2NzB9.-7p8tpC88WX0si28lYJ5iwjys_DOqTe3ugKy1sbOBWY");
         this.fetchSteps();
         this.fetchStartup();
         this.fetchModules();

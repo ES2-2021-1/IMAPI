@@ -47,8 +47,13 @@ export default {
 				'api/auth',
 				bodyParameters
 				).then((response)=> {
-          this.$session.set("token", response.data.token);
-					this.$router.push({ name: 'home' })
+          if (response.status === 200 && 'token' in response.body) {
+            console.log("oi boi")
+            this.$session.start()
+            this.$session.set('jwt', response.body.token)
+            window.Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
+            this.$router.push({ name: 'home' });
+          }
 				}).catch( err => {
           console.log(err.response.data)
           if (err.response.data.errors) {
