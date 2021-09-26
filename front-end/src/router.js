@@ -34,7 +34,8 @@ export default new VueRouter({
         {
             path: '/startup/:id',
             name: 'startup-details',
-            component: StartupDetails
+            component: StartupDetails,
+            props: true
         },
 
         {

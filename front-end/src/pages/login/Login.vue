@@ -48,7 +48,7 @@ export default {
 				bodyParameters
 				).then((response)=> {
           this.$session.set('jwt', response.data.token);
-          window.axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+          window.axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
 					this.$router.push({ name: 'home' });
 				}).catch( err => {
           if (err.response.data.errors) {

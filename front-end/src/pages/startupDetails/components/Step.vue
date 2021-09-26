@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         async fetchTask() {
-            let { data } = await window.axios.get(`/api/task/`, {headers: { Authorization: `Bearer ${this.$session.get("token")}`}});
+            let { data } = await window.axios.get(`/api/task/`, {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}});
             for(let task in data){
                 if(data[task].stepId == this.step.id){
                     this.task = data[task];
