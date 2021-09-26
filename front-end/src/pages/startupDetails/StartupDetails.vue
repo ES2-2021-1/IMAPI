@@ -40,18 +40,18 @@ export default {
     },
     methods: {
         async fetchModules() {
-            let { data } = await window.axios.get(`/api/module/`, {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}});
+            let { data } = await window.axios.get(`/api/module/`, {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}}).catch(() => this.$router.push({ name: 'error' }));
             this.modules = data;
         },
         async fetchStartup() {
-            let { data } = await window.axios.get(`/api/startup/`+this.id, {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}});
+            let { data } = await window.axios.get(`/api/startup/`+this.id, {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}}).catch(() => this.$router.push({ name: 'error' }));
             this.startup = data[0];
-            if(!this.startup || this.startup.ownerId != this.$session.get('user_id')){
+            if(!this.startup || this.startup.ownerId != this.$session.get('userId')){
                 this.$router.push({ name: 'error' });
             }
         },
         async fetchSteps() {
-            let { data } = await window.axios.get(`/api/step/`, {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}});
+            let { data } = await window.axios.get(`/api/step/`, {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}}).catch(() => this.$router.push({ name: 'error' }));
             this.nSteps = data.length;
             for await(let step of data){
                 if(this.steps[step.moduleId]){
@@ -64,7 +64,8 @@ export default {
         },
     },
     created() {
-        this.$session.set('user_id', 1);
+        console.log(window.axios.defaults.headers);
+        this.$session.set('userId', 1);
         this.fetchSteps();
         this.fetchStartup();
         this.fetchModules();

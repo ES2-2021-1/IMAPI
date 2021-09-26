@@ -12,11 +12,12 @@
                 </div>
             </div>
 
-            <StartupBox  v-for ="item in items" :key = 'item.id'
+            <StartupBox  v-for ="item in items" :key="item.id"
             :img="require('@/assets/img/logo sample.png')"
-            :title= "item.name"
-            :description= "item.description"
-            :status= "item.currentStepId" />
+            :title="item.name"
+            :description="item.description"
+            :status="item.status"
+            :id="item.id" />
 
         </div>
     </div>
@@ -44,15 +45,13 @@ export default {
     },
     mounted() {
         var userId = this.$session.get('userId');
-        
-        window.axios.get('api/startup/').then(
-
+        window.axios.get('api/startup/', {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}}).then(
             (resp) => {
                 var startups = [];
 
                 for (var startup in resp.data){
 
-                    if (resp.data[startup].ownerId== userId){
+                    if (resp.data[startup].ownerId == userId){
                         
                         startups.push(resp.data[startup])
 

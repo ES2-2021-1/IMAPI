@@ -17,6 +17,7 @@
 
                         <li class="nav-item"><a class="nav-link active" href="#" style="color: var(--bs-light);padding-right: 20px;">Contato</a></li>
                         <li class="nav-item"><a class="nav-link" href="#" style="color: var(--bs-light);padding-right: 20px;">Sobre Nós</a></li>
+                        <li v-if="this.$session.exists()" @click="logout" class="nav-item"><a class="nav-link" href="#" style="color: var(--bs-light);padding-right: 20px;">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -35,6 +36,13 @@ export default {
         return   {
             url: 'index.html'
         }
+  },
+  methods: {
+      logout: function () {
+          this.$session.destroy();
+          this.$router.push({ name: 'index' });
+          document.location.reload();
+      }
   }
 }
 </script>

@@ -21,7 +21,7 @@ Vue.use(VueRouter)
 Vue.use(VueMask); 
 Vue.use(VueSession)
 
-window.axios = Vue.axios.create({ baseURL: 'http://localhost:8082/' });
+window.axios = Vue.axios.create({baseURL: 'http://localhost:8082/'});
 window.router = VueRouter;
 window.Vue = Vue;
 
