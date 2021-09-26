@@ -23,9 +23,7 @@
 </template>
 
 <script>
-
 import StartupBox from "./components/StartupBox.vue";
-
 
 export default {
 
@@ -39,8 +37,13 @@ export default {
         return {items: undefined}
     } ,
 
+    beforeCreate() {
+        if(!this.$session.exists())
+            this.$router.push({ name: 'index' });
+
+    },
     mounted() {
-        var userId = 3
+        var userId = this.$session.get('userId');
         
         window.axios.get('api/startup/').then(
 
@@ -55,7 +58,6 @@ export default {
 
                     }
                 }
-
                 this.items = startups;
                 
             }

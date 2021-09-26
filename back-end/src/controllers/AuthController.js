@@ -36,7 +36,7 @@ class AuthController{
             if (result){
                 let token = jwt.sign({"id": user.id}, process.env.JWT_SECRET, {expiresIn: process.env.SESSION_LIFETIME});
                 res.status(200);
-                res.json({"token":token});
+                res.json({"token":token, "userId": user.id});
                 return;
             }
             if(err){
