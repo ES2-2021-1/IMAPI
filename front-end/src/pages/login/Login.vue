@@ -47,15 +47,10 @@ export default {
 				'api/auth',
 				bodyParameters
 				).then((response)=> {
-          if (response.status === 200 && 'token' in response.body) {
-            console.log("oi boi")
-            this.$session.start()
-            this.$session.set('jwt', response.body.token)
-            window.Vue.http.headers.common['Authorization'] = 'Bearer ' + response.body.token
-            this.$router.push({ name: 'home' });
-          }
+          this.$session.set('jwt', response.data.token);
+          window.axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+					this.$router.push({ name: 'home' });
 				}).catch( err => {
-          console.log(err.response.data)
           if (err.response.data.errors) {
             if(err.response.data.errors.email){
               this.emailError = err.response.data.errors.email[0];
