@@ -64,7 +64,6 @@ export default {
     methods: {
         async onSubmit() {
             for(var file of this.files){
-                console.log(file);
                 let dataForm = new FormData(); 
                 dataForm.append('upload', file);
                 const headers = {Authorization: `Bearer ${this.$session.get("jwt")}`, 'Content-Type': 'multipart/form-data'};

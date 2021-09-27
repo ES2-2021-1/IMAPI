@@ -53,9 +53,7 @@ export default {
   methods:{
     resizeLayout : function(){
             let navbarSize = window.$("nav").outerHeight();
-            console.log(navbarSize);
             let footerSize = window.$("footer").outerHeight();
-            console.log(footerSize);
             let documentSize = window.$(window).height();
 
             let content = window.$("#content");

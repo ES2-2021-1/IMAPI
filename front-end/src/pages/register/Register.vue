@@ -77,7 +77,6 @@ export default {
 				'api/user',
 				bodyParameters
 				).then(()=> {
-					console.log("User Created")
 					this.$router.push({ name: 'login' })
 				}).catch( err => {
 					if(err.response.data.errors.name){
