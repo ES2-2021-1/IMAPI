@@ -15,14 +15,11 @@
         <link rel="stylesheet" :href="require('@/assets/css/Footer-Basic.css')">
         <link rel="stylesheet" :href="require('@/assets/css/Testimonials.css')">
     </head>
-
-    <!-- <body style="background-image: radial-gradient(#39b72e 2px, transparent 2px);background-size: 27px 27px;background-color: #9be268;"> -->
-        <Header/>
+      <Header/>
+      <div id="content">
         <router-view></router-view>
-        <Footer/>
-
-    <!-- </body> -->
-
+      </div>
+      <Footer/>
     </html>
 </template>
 
@@ -52,6 +49,22 @@ export default {
   },
   props: {
     title: String
+  },
+  methods:{
+    resizeLayout : function(){
+            let navbarSize = window.$("nav").outerHeight();
+            console.log(navbarSize);
+            let footerSize = window.$("footer").outerHeight();
+            console.log(footerSize);
+            let documentSize = window.$(window).height();
+
+            let content = window.$("#content");
+            content.css('min-height',documentSize-navbarSize-footerSize)
+        }
+  },
+  mounted(){
+    this.resizeLayout();
+    window.addEventListener('resize', this.resizeLayout);
   }
 }
 </script>

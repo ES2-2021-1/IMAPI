@@ -16,7 +16,7 @@
             :img="require('@/assets/img/logo sample.png')"
             :title="item.name"
             :description="item.description"
-            :status="item.status"
+            :status="item.state"
             :id="item.id" />
 
         </div>
@@ -32,12 +32,10 @@ export default {
     components: {
         StartupBox,
     },
-    
     data(){
 
         return {items: undefined}
     } ,
-
     beforeCreate() {
         if(!this.$session.exists())
             this.$router.push({ name: 'index' });
@@ -61,8 +59,6 @@ export default {
                 
             }
         )
-
-
     }
 }
 </script>

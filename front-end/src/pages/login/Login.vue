@@ -57,7 +57,7 @@ export default {
           window.axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
 					this.$router.push({ name: 'home' });
           console.log(window.axios.defaults.headers);
-          // document.location.reload();
+          document.location.reload();
 				}).catch( err => {
           if (err.response.data.errors) {
             if(err.response.data.errors.email){

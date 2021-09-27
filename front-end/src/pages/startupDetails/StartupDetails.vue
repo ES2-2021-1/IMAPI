@@ -12,7 +12,7 @@
             <div class="col-md-8">
                 <b-progress :value="startup.currentStepId" :max="nSteps" height="10px" animated variant="success"></b-progress>
                 <div class="accordion" role="tablist" id="accordion-1">
-                    <Module v-for="module in modules" :key="module.id" :module="module" :steps="steps[module.id]"/>
+                    <Module v-for="module in modules" :startupId="id" :key="module.id" :module="module" :steps="steps[module.id]"/>
                 </div>
             </div>
         </b-row>
@@ -64,8 +64,6 @@ export default {
         },
     },
     created() {
-        console.log(window.axios.defaults.headers);
-        this.$session.set('userId', 1);
         this.fetchSteps();
         this.fetchStartup();
         this.fetchModules();

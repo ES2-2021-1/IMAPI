@@ -9,8 +9,15 @@
                 <h4 class="text-center">Conteúdo</h4>
                 <p class="py-2">{{step.content}}</p>
 
+                <div v-if="stepAnnexes.length > 0">
+                    <hr>
+                    <b-list-group>
+                        <b-list-group-item v-for="stepAnnex in stepAnnexes" :key="stepAnnex.id">{{stepAnnex.path}}</b-list-group-item>
+                    </b-list-group>
+                </div>
+
                 <div v-if="task">
-                    <Task :task="task"/>
+                    <Task :task="task" :startupId="startupId" :annexes="annexes"/>
                 </div>
             </b-card>
             
@@ -28,10 +35,13 @@ export default {
 	},
     props: {
         step: null,
+        startupId: null,
     },
     data() {
         return {
-            task : null
+            task : null,
+            annexes: [],
+            stepAnnexes: [],
         }
     },
     methods: {
@@ -43,9 +53,19 @@ export default {
                 }
             }
         },
+        async fetchAnnexes() {
+            let { data } = await window.axios.get(`/api/annex/`, {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}});
+            this.annexes = data;
+            for await(let annex of data){
+                if(annex.stepId == this.step.id){
+                    this.stepAnnexes.push(annex);
+                }
+            }
+        },
     },
     created() {
         this.fetchTask();
+        this.fetchAnnexes();
     },
 }
 </script>

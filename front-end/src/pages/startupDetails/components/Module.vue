@@ -2,7 +2,7 @@
     <div class="accordion-item">
         <h2 id="collapse" v-b-toggle="'collapse-module'+module.id" variant="primary" role="tab"><button class="accordion-button collapsed">{{ module.title }}</button></h2>
         <b-collapse :id="'collapse-module'+module.id" class="mt-2">
-            <Step v-for="step in steps" :key="step.id" :step="step"/>
+            <Step v-for="step in steps" :key="step.id" :step="step" :startupId="startupId"/>
         </b-collapse>
     </div>
 </template>
@@ -17,7 +17,8 @@ export default {
 	},
     props: {
         module: null,
-        steps: null
+        steps: null,
+        startupId: null,
     },
 }
 </script>

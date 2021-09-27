@@ -11,7 +11,9 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueMask from 'v-mask';
 import VueSession from 'vue-session'
-import  router from './router';
+import router from './router';
+import JQuery from 'jquery'
+window.$ = JQuery;
 
 Vue.config.productionTip = false
 
