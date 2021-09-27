@@ -217,7 +217,7 @@ Cria um novo anexo.
     Uma explicação mais intuitiva alternativa ao Schema é:
     - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `stepId`, e os campos `taskId` e `submissionId` são, então, dispensáveis
     - se um Annex possui `type = 1`, então obrigatoriamente ele precisa ter um campo `taskId`, e os campos `stepId` e `submissionId` são, então, dispensáveis
-    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
+    - se um Annex possui `type = 2`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
 
     + Headers
 
@@ -380,7 +380,7 @@ Edita os dados de um anexo já existente.
     Uma explicação mais intuitiva alternativa ao Schema é:
     - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `stepId`, e os campos `taskId` e `submissionId` são, então, dispensáveis
     - se um Annex possui `type = 1`, então obrigatoriamente ele precisa ter um campo `taskId`, e os campos `stepId` e `submissionId` são, então, dispensáveis
-    - se um Annex possui `type = 0`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
+    - se um Annex possui `type = 2`, então obrigatoriamente ele precisa ter um campo `submissionId`, e os campos `taskId` e `stepId` são, então, dispensáveis
 
     + Headers
 
@@ -495,6 +495,7 @@ Remove permanentemente uma anexo.
     - Body
     
             "Not deleted"
+
         
 
 # Group Auth
@@ -505,7 +506,7 @@ Recursos relacionados ao Auth na API.
 
 ### Autenticar [POST]
 
-Faz uma autenticação.
+Faz uma autenticação. Utilizada para conectar um usuário ao sistema.
 
 + Request (application/json)
 
@@ -538,7 +539,8 @@ Faz uma autenticação.
     - Body
     
             {
-                "token" : "eyaDiJIUzIFFsdasR5J9.eyJpZCI6NCwiaGyOTEwLCJzIxN234MTB4.-KKwBhmES2D2fCtsdV_3423EdzvvSM"
+                "token" : "eyaDiJIUzIFFsdasR5J9.eyJpZCI6NCwiaGyOTEwLCJzIxN234MTB4.-KKwBhmES2D2fCtsdV_3423EdzvvSM",
+                "userId" : 1
             }
         
     - Schema
@@ -550,6 +552,9 @@ Faz uma autenticação.
                 "properties" : {
                     "token" : {
                         "type" : "string"
+                    }
+                    "userId" : {
+                        "type" : "integer"
                     }
                 }
             }

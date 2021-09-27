@@ -12,7 +12,7 @@ Recursos relacionados ao Auth na API.
 
 ### Autenticar [POST]
 
-Faz uma autenticação.
+Faz uma autenticação. Utilizada para conectar um usuário ao sistema.
 
 + Request (application/json)
 
@@ -45,7 +45,8 @@ Faz uma autenticação.
     - Body
     
             {
-                "token" : "eyaDiJIUzIFFsdasR5J9.eyJpZCI6NCwiaGyOTEwLCJzIxN234MTB4.-KKwBhmES2D2fCtsdV_3423EdzvvSM"
+                "token" : "eyaDiJIUzIFFsdasR5J9.eyJpZCI6NCwiaGyOTEwLCJzIxN234MTB4.-KKwBhmES2D2fCtsdV_3423EdzvvSM",
+                "userId" : 1
             }
         
     - Schema
@@ -57,6 +58,9 @@ Faz uma autenticação.
                 "properties" : {
                     "token" : {
                         "type" : "string"
+                    }
+                    "userId" : {
+                        "type" : "integer"
                     }
                 }
             }
