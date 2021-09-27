@@ -1,10 +1,5 @@
 <template>
-  <div id="app">
-    <!-- <BaseRaw title="Teste"/> -->
     <Base title="Teste"/>
-
-  </div>
-
 </template>
 
 <script>
@@ -13,11 +8,11 @@ import Base from "./layouts/Base.vue";
 
 
 export default {
-  name: 'App',
-  components: {
-    Base,
-    // BaseRaw
-  }
+    name: 'App',
+    components: {
+        Base,
+        // BaseRaw
+    }
 }
 </script>
 

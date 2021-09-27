@@ -12,11 +12,12 @@
                 </div>
             </div>
 
-            <StartupBox  v-for ="item in items" :key = 'item.id'
+            <StartupBox  v-for ="item in items" :key="item.id"
             :img="require('@/assets/img/logo sample.png')"
-            :title= "item.name"
-            :description= "item.description"
-            :status= "item.currentStepId" />
+            :title="item.name"
+            :description="item.description"
+            :status="item.state"
+            :id="item.id" />
 
         </div>
     </div>
@@ -31,12 +32,10 @@ export default {
     components: {
         StartupBox,
     },
-    
     data(){
 
         return {items: undefined}
     } ,
-
     beforeCreate() {
         if(!this.$session.exists())
             this.$router.push({ name: 'index' });
@@ -44,15 +43,13 @@ export default {
     },
     mounted() {
         var userId = this.$session.get('userId');
-        
-        window.axios.get('api/startup/').then(
-
+        window.axios.get('api/startup/', {headers: { Authorization: `Bearer ${this.$session.get("jwt")}`}}).then(
             (resp) => {
                 var startups = [];
 
                 for (var startup in resp.data){
 
-                    if (resp.data[startup].ownerId== userId){
+                    if (resp.data[startup].ownerId == userId){
                         
                         startups.push(resp.data[startup])
 
@@ -62,8 +59,6 @@ export default {
                 
             }
         )
-
-
     }
 }
 </script>

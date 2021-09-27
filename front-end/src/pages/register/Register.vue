@@ -1,5 +1,5 @@
 <template>
-	<div class="form-login py-5 my-4">
+	<div class="py-5 my-4">
 		<section class="login-dark d-flex justify-content-center login-dark">
 		<form @submit.prevent="register">
 			<h2 class="visually-hidden">Login Form</h2>
@@ -77,7 +77,6 @@ export default {
 				'api/user',
 				bodyParameters
 				).then(()=> {
-					console.log("User Created")
 					this.$router.push({ name: 'login' })
 				}).catch( err => {
 					if(err.response.data.errors.name){
